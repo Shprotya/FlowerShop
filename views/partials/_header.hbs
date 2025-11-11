@@ -15,22 +15,22 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link {{#if state.home}}active{{/if}}" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/shop">Shop</a>
+                    <a class="nav-link {{#if state.shop}}active{{/if}}" href="/shop">Shop</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/about">About</a>
+                    <a class="nav-link {{#if state.about}}active{{/if}}" href="/about">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/contact">Contact</a>
+                    <a class="nav-link {{#if state.contact}}active{{/if}}" href="/contact">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
+                    <a class="nav-link {{#if state.login}}active{{/if}}" href="/login">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/checkout">
+                    <a class="nav-link {{#if state.checkout}}active{{/if}}" href="/checkout">
                         🛒 Cart (<span id="cart-count">0</span>)
                     </a>
                 </li>
