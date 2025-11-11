@@ -32,13 +32,13 @@ app.use(express.urlencoded({ extended: true }));
 
 // home page or home route
 app.get('/', (req, res) => {
-  // set active or not for navigation
+    // set active or not for navigation
     state={'home' : true, contact : false}
-  // set specifics for <head>
+    // set specifics for <head>
     head={'title': "Petal Poetry", description: "Explore different flowers for sale", 
     keywords: "flower shop, buy flowers, floral arrangements, bouquets"}
     res.render('index', {state:state, head:head});
-  // send this to terminal where node app is running
+    // send this to terminal where node app is running
     console.log('home')
 });
 
