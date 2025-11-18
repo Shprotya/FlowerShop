@@ -27,11 +27,14 @@
                     <a class="nav-link {{#if state.contact}}active{{/if}}" href="/contact">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{#if state.login}}active{{/if}}" href="/login">Login</a>
+                    <a class="nav-link {{#if state.login}}active{{/if}}" id="loginlogout" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{#if state.userdetails}}active{{/if}}" id="userdetails" href="/userdetails">User Details</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{#if state.checkout}}active{{/if}}" href="/checkout">
-                        🛒 Cart (<span id="cart-count">0</span>)
+                        🛒 Cart <span id="checkout"></span>
                     </a>
                 </li>
             </ul>

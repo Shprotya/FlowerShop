@@ -87,6 +87,16 @@ app.get('/checkout', (req, res) => {
     console.log('checkout');
 });
 
+// user details page route
+app.get('/userdetails', (req, res) => {
+    const state = {home: false, shop: false, about: false, contact: false, login: false, checkout: false, userdetails: true};
+    const head = {title: "User Details - Petal Poetry", description: "Your saved details", 
+    keywords: "user details, account, Petal Poetry"};
+    // Render the `userDetails.hbs` view (file is named `userDetails.hbs` in views/)
+    res.render('userdetails', {state: state, head: head});
+    console.log('userdetails');
+});
+
 // Start the server
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
