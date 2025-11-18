@@ -34,7 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
     // set active or not for navigation
     const state = {home: true, shop: false, about: false, contact: false, login: false, checkout: false};
-    // set specifics for <head>
+    // set specifics for <head>.
     const head = {title: "Petal Poetry", description: "Explore different flowers for sale", 
     keywords: "flower shop, buy flowers, floral arrangements, bouquets"};
     res.render('index', {state: state, head: head});
