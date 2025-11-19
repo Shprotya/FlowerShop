@@ -1,4 +1,16 @@
 $soft-peach: #fef7f0;
+$dusty-rose: #CE5E5B;
+$blush-pink: #DD8E8C;
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
 
 form {
     margin: 10px;
@@ -6,4 +18,67 @@ form {
 
 .navbar {
     background-color: $soft-peach;
+    
+    .navbar-brand {
+        font-size: 1.5rem;
+        color: $dusty-rose;
+        font-weight: 600;
+    }
+    
+    .nav-link {
+        &.active {
+            color: $dusty-rose !important;
+            font-weight: 600;
+            border-bottom: 2px solid $dusty-rose;
+        }
+        
+        &:hover {
+            color: $blush-pink;
+        }
+    }
+}
+
+.footer {
+    background-color: $soft-peach;
+
+    // Newsletter specific styling for the input field
+    .newsletter-input {
+        
+        color: $dusty-rose;
+        padding: 0.75rem 1rem;
+
+        &::placeholder {
+            color: $blush-pink;
+        }
+    }
+
+    .newsletter-button {
+        padding: 0.75rem 1rem;
+    }
+}
+
+// Product cards
+.product-card {
+    transition: transform 0.3s ease;
+    border: 1px solid $blush-pink;
+    
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    img {
+        height: 250px;
+        object-fit: cover;
+    }
+}
+
+.btn-primary {
+    background-color: $dusty-rose;
+    border-color: $dusty-rose;
+    
+    &:hover {
+        background-color: darken($dusty-rose, 10%);
+        border-color: darken($dusty-rose, 10%);
+    }
 }
