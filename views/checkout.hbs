@@ -1,104 +1,105 @@
 <h1>Checkout</h1>
-    <div>    
-        <div> 
-            <form name="checkout" id="user-checkout" action="" method="get">
-                <fieldset>
-                    <legend>Delivery Details</legend>
+<div>
+    <div>
+        <form name="checkout" id="user-checkout" action="" method="get">
+            <fieldset>
+                <legend>Delivery Details</legend>
 
-                        <label for="getFirstName">First name</label>
-                        <input type="text"  id="getFirstName" name="firstname" value="firstname" required>
+                <label for="getFirstName">First name</label>
+                <input type="text" id="getFirstName" name="firstname" value="firstname" required>
 
-                        <label for="getLastName">Last name</label> 
-                        <input type="text" c id="getLastName" name="lastname" value="surname" required>
+                <label for="getLastName">Last name</label>
+                <input type="text" c id="getLastName" name="lastname" value="surname" required>
 
-                        <label for="getAddress1">Addresss</label> 
-                        <input type="text"  id="getAddress1" name="address2" value="address 1" required>
+                <label for="getAddress1">Addresss</label>
+                <input type="text" id="getAddress1" name="address2" value="address 1" required>
 
-                        <label for="getAddress2">Addresss</label> 
-                        <input type="text" id="getAddress2" name="address2"  value="address 2"  required>
+                <label for="getAddress2">Addresss</label>
+                <input type="text" id="getAddress2" name="address2" value="address 2" required>
 
-                        <label for="getAddress3">Addresss</label> 
-                        <input type="text"  id="getAddress3" name="address3"  value="address 3"  required>
-                </fieldset>
+                <label for="getAddress3">Addresss</label>
+                <input type="text" id="getAddress3" name="address3" value="address 3" required>
+            </fieldset>
 
-                <fieldset>
-                    <legend>Payment Details</legend>
+            <fieldset>
+                <legend>Payment Details</legend>
 
-                        <label for="getCardName">Card Name</label> 
-                        <input type="text" id="cardName" name="cardname" value="MR FIRSTNAME SURNAME" required>
+                <label for="getCardName">Card Name</label>
+                <input type="text" id="cardName" name="cardname" value="MR FIRSTNAME SURNAME" required>
 
-                        <label for="getCardNumber">Card Number</label> 
-                        <input type="text" id="cardNumber" name="cardNumber" value="1234 5678 9102 3456" required>
+                <label for="getCardNumber">Card Number</label>
+                <input type="text" id="cardNumber" name="cardNumber" value="1234 5678 9102 3456" required>
 
-                        <label for="getCardCVC">CVC</label> 
-                        <input type="password" id="cardCvv" name="cardCvv" required>
-                </fieldset>
+                <label for="getCardCVC">CVC</label>
+                <input type="password" id="cardCvv" name="cardCvv" required>
+            </fieldset>
 
-                <div id="payment-success" role="alert">
-                    Thank you for your purchase. You will receive delivery details via email. Please return to our <a href="/shop">Shopping Page</a>.
-                </div>
-                <div  id="payment-failure" role="alert">
-                    There seems to be a problem with the card details you entered.
-                </div>                
-                <div>
-                    <input type='submit' class="btn btn-primary" id="buy-now" name="buy-now" value="Buy Now">
-                </div>
-            </form>
+            <div id="payment-success" role="alert">
+                Thank you for your purchase. You will receive delivery details via email. Please return to our <a
+                    href="/shop">Shopping Page</a>.
+            </div>
+            <div id="payment-failure" role="alert">
+                There seems to be a problem with the card details you entered.
+            </div>
+            <div>
+                <input type='submit' class="btn btn-primary" id="buy-now" name="buy-now" value="Buy Now">
+            </div>
+        </form>
 
 
-        </div> 
     </div>
+</div>
 
 <script>
     // checkout.js
 
-var checkout = document.getElementById('buy-now');
-// add a listener for add to cart if such a button id is pressed
-var element = document.getElementById("payment-failure");
-element.style.display = 'none';
-var element = document.getElementById("payment-success");
-element.style.display = 'none';
+    var checkout = document.getElementById('buy-now');
+    // add a listener for add to cart if such a button id is pressed
+    var element = document.getElementById("payment-failure");
+    element.style.display = 'none';
+    var element = document.getElementById("payment-success");
+    element.style.display = 'none';
 
-        var loggedin = localStorage.getItem('loggedIn');
-        if (loggedin == '0' || loggedin == 0 || !loggedin) {
-            // redirect to login route
-            window.location.href = '/login';
-        }
-// add a listener so that we run this code and preventdefault for submit...
-checkout.addEventListener("click", (event) => {
-    event.preventDefault();
-    var cardnumber=document.getElementById('cardNumber').value;
-    var cardcvv=document.getElementById('cardCvv').value;
+    var loggedin = localStorage.getItem('loggedIn');
+    if (loggedin == '0' || loggedin == 0 || !loggedin) {
+        // redirect to login route
+        window.location.href = '/login';
+    }
+    // add a listener so that we run this code and preventdefault for submit...
+    checkout.addEventListener("click", (event) => {
+        event.preventDefault();
+        var cardnumber = document.getElementById('cardNumber').value;
+        var cardcvv = document.getElementById('cardCvv').value;
 
         if (cardnumber == "1234 5678 9102 3456" && cardcvv == "123") {
-        alert("payment success");
-        var element = document.getElementById("payment-failure");
-        element.style.display = 'none';
-        //element.classList.add("d-none"); // bootstrap hide
-        var element = document.getElementById("payment-success");
-        element.style.display = 'block';
-        //element.classList.remove("d-none"); // bootstrap hide
-        // now set cart total to zero
-        var total = 0;
-        // makes sure that when we goto another page the total is zero 
-        localStorage.setItem('checkout', total);
+            alert("payment success");
+            var element = document.getElementById("payment-failure");
+            element.style.display = 'none';
+            //element.classList.add("d-none"); // bootstrap hide
+            var element = document.getElementById("payment-success");
+            element.style.display = 'block';
+            //element.classList.remove("d-none"); // bootstrap hide
+            // now set cart total to zero
+            var total = 0;
+            // makes sure that when we goto another page the total is zero 
+            localStorage.setItem('checkout', total);
 
-    } else {
-        alert("payment failure");
-        var element = document.getElementById("payment-failure");
-        if (element) element.style.display = 'block';
-        var element = document.getElementById("payment-success");
-        if (element) element.style.display = 'none';
-        //element.classList.add("d-none");
-        var element = document.getElementById("payment-failure");
-        //element.classList.remove("d-none");
- 
-    }
+        } else {
+            alert("payment failure");
+            var element = document.getElementById("payment-failure");
+            if (element) element.style.display = 'block';
+            var element = document.getElementById("payment-success");
+            if (element) element.style.display = 'none';
+            //element.classList.add("d-none");
+            var element = document.getElementById("payment-failure");
+            //element.classList.remove("d-none");
+
+        }
 
 
-    
-    
-})
+
+
+    })
 
 
 
