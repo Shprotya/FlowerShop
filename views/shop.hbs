@@ -1,12 +1,12 @@
-<div >
-    <div >
-      <h2>
-        Product 1
-      </h2>
-      <div>
-            <img src="https://placehold.co/200x200"/>
-            <a href="#" class="add-to-cart">Add to Cart</a>
-      </div>
+<div>
+  <div>
+    <h2>
+      Product 1
+    </h2>
+    <div>
+      <img src="https://placehold.co/200x200" />
+      <a href="#" class="add-to-cart">Add to Cart</a>
+    </div>
 
 
     <div>
@@ -14,24 +14,23 @@
         Product 2
       </h2>
       <div>
-            <img src="https://placehold.co/200x200"/>
-            <a href="#" class="add-to-cart">Add to Cart</a>
+        <img src="https://placehold.co/200x200" />
+        <a href="#" class="add-to-cart">Add to Cart</a>
       </div>
     </div>
 
-<script>
-        document.addEventListener('DOMContentLoaded', () => {
-          const buttons = document.querySelectorAll('.add-to-cart');
-          buttons.forEach(btn => {
-            btn.addEventListener('click', (ev) => {
-              ev.preventDefault();
-              let total = parseInt(localStorage.getItem('checkout') || '0', 10);
-              total = total + 1;
-              localStorage.setItem('checkout', total);
-              const checkoutSpan = document.querySelector('#checkout');
-              if (checkoutSpan) checkoutSpan.innerHTML = total;
-            });
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const buttons = document.querySelectorAll('.add-to-cart');
+        buttons.forEach(btn => {
+          btn.addEventListener('click', (ev) => {
+            ev.preventDefault();
+            let total = parseInt(localStorage.getItem('checkout') || '0', 10);
+            total = total + 1;
+            localStorage.setItem('checkout', total);
+            const checkoutSpan = document.querySelector('#checkout');
+            if (checkoutSpan) checkoutSpan.innerHTML = total;
           });
         });
-      </script>
-</script>
+      });
+    </script>
