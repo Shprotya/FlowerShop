@@ -18,20 +18,20 @@ form {
 
 .navbar {
     background-color: $soft-peach;
-    
+
     .navbar-brand {
         font-size: 1.5rem;
         color: $dusty-rose;
         font-weight: 600;
     }
-    
+
     .nav-link {
         &.active {
             color: $dusty-rose !important;
             font-weight: 600;
             border-bottom: 2px solid $dusty-rose;
         }
-        
+
         &:hover {
             color: $blush-pink;
         }
@@ -43,7 +43,7 @@ form {
 
     // Newsletter specific styling for the input field
     .newsletter-input {
-        
+
         color: $dusty-rose;
         padding: 0.75rem 1rem;
 
@@ -61,12 +61,12 @@ form {
 .product-card {
     transition: transform 0.3s ease;
     border: 1px solid $blush-pink;
-    
+
     &:hover {
         transform: translateY(-5px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-    
+
     img {
         height: 250px;
         object-fit: cover;
@@ -76,9 +76,26 @@ form {
 .btn-primary {
     background-color: $dusty-rose;
     border-color: $dusty-rose;
-    
+
     &:hover {
         background-color: darken($dusty-rose, 10%);
         border-color: darken($dusty-rose, 10%);
+    }
+}
+
+#heroCarousel {
+    .carousel-item {
+        img {
+            height: 300px;
+            object-fit: cover;
+
+            @media (min-width: 768px) {
+                height: 400px;
+            }
+
+            @media (min-width: 992px) {
+                height: 500px;
+            }
+        }
     }
 }

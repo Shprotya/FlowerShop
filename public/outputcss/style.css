@@ -1,3 +1,13 @@
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
 form {
   margin: 10px;
 }
@@ -5,7 +15,72 @@ form {
 .navbar {
   background-color: #fef7f0;
 }
+.navbar .navbar-brand {
+  font-size: 1.5rem;
+  color: #CE5E5B;
+  font-weight: 600;
+}
+.navbar .nav-link.active {
+  color: #CE5E5B !important;
+  font-weight: 600;
+  border-bottom: 2px solid #CE5E5B;
+}
+.navbar .nav-link:hover {
+  color: #DD8E8C;
+}
 
 .footer {
   background-color: #fef7f0;
+}
+.footer .newsletter-input {
+  color: #CE5E5B;
+  padding: 0.75rem 1rem;
+}
+.footer .newsletter-input::-moz-placeholder {
+  color: #DD8E8C;
+}
+.footer .newsletter-input::placeholder {
+  color: #DD8E8C;
+}
+.footer .newsletter-button {
+  padding: 0.75rem 1rem;
+}
+
+.product-card {
+  transition: transform 0.3s ease;
+  border: 1px solid #DD8E8C;
+}
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.product-card img {
+  height: 250px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.btn-primary {
+  background-color: #CE5E5B;
+  border-color: #CE5E5B;
+}
+.btn-primary:hover {
+  background-color: rgb(189.4084507042, 60.0563380282, 56.5915492958);
+  border-color: rgb(189.4084507042, 60.0563380282, 56.5915492958);
+}
+
+#heroCarousel .carousel-item img {
+  height: 300px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+@media (min-width: 768px) {
+  #heroCarousel .carousel-item img {
+    height: 400px;
+  }
+}
+@media (min-width: 992px) {
+  #heroCarousel .carousel-item img {
+    height: 500px;
+  }
 }
