@@ -1,40 +1,143 @@
-<form id="user-login">
-    <div role="alert" id="loginerror" style="display:none;">The username or password you entered is incorrect. <a href="">Forgot your password?</a></div>
-    <div class="form-group">
-        <label for="emailAddressID">Email address</label>
-        <input type="email" class="form-control" id="emailAddressID" aria-describedby="emailHelp" placeholder="Enter email" value="wmitty@email.com" required>
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+<div class="container-fluid login-page">
+    <div class="row min-vh-100">
+        
+        <div class=" d-flex align-items-center justify-content-center p-4">
+            <div class="w-100" style="max-width: 500px;">
+                <!-- Mobile logo -->
+                <div class="text-center mb-4 d-lg-none">
+                    <img src="images/logo.png" alt="Petal Poetry Logo" height="80" width="80" class="mb-3">
+                    <h2 class="mb-2">Petal Poetry</h2>
+                </div>
+
+                <div class="card shadow border-0">
+                    <div class="card-body p-4 p-md-5">
+                        <div class="text-center mb-4">
+                            <h2 class="mb-2">Welcome Back</h2>
+                            <p class="text-muted">Sign in to continue your floral journey</p>
+                        </div>
+
+                        <div role="alert" id="loginerror" class="alert alert-danger" style="display:none;">
+                            <i class="fas fa-exclamation-circle me-2"></i>
+                            The username or password you entered is incorrect.
+                            <a href="#" class="alert-link">Forgot your password?</a>
+                        </div>
+
+                        <form id="user-login">
+                            <div class="mb-3">
+                                <label for="emailAddressID" class="form-label">
+                                    <i class="fas fa-envelope me-2"></i>Email address
+                                </label>
+                                <input type="email" class="form-control form-control-lg" id="emailAddressID"
+                                    placeholder="Enter your email" value="wmitty@email.com" required>
+                                <small class="form-text text-muted">
+                                    We'll never share your email with anyone else.
+                                </small>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="passwordID" class="form-label">
+                                    <i class="fas fa-lock me-2"></i>Password
+                                </label>
+                                <input type="password" class="form-control form-control-lg" id="passwordID"
+                                    placeholder="Enter your password" value="password1" required>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="rememberMe">
+                                    <label class="form-check-label" for="rememberMe">
+                                        Remember me
+                                    </label>
+                                </div>
+                                <a href="#" class="text-decoration-none">Forgot password?</a>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-lg w-100 mb-3">
+                                <i class="fas fa-sign-in-alt me-2"></i>Sign In
+                            </button>
+                        </form>
+
+                        <div class="text-center my-3">
+                            <span class="text-muted">or continue with</span>
+                        </div>
+
+                        <div class="row g-2 mb-3">
+                            <div class="col-6">
+                                <button class="btn btn-outline-secondary w-100">
+                                    <i class="fab fa-google me-2"></i>Google
+                                </button>
+                            </div>
+                            <div class="col-6">
+                                <button class="btn btn-outline-secondary w-100">
+                                    <i class="fab fa-facebook me-2"></i>Facebook
+                                </button>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="text-center">
+                            <p class="mb-0">Don't have an account?
+                                <a href="#" class="text-decoration-none fw-bold">Create
+                                    Account</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Benefits section -->
+                <div class="row text-center mt-4 g-3 benefit-box">
+                    <div class="col-4">
+                        <div class="p-3 rounded shadow-sm hover-effect">
+                            <i class="fas fa-shipping-fast fa-2x mb-2"></i>
+                            <small class="d-block">Free Delivery</small>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="p-3 rounded shadow-sm hover-effect">
+                            <i class="fas fa-tags fa-2x mb-2"></i>
+                            <small class="d-block">Member Deals</small>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="p-3 rounded shadow-sm hover-effect">
+                            <i class="fas fa-star fa-2x mb-2"></i>
+                            <small class="d-block">Earn Points</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Test credentials info -->
+                <div class="alert alert-info mt-4 text-center">
+                    <small>
+                        <strong><i class="fas fa-info-circle me-1"></i>Test credentials:</strong><br>
+                        Email: wmitty@email.com | Password: password1
+                    </small>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="passwordID">Password</label>
-        <input type="password" class="form-control" id="passwordID" placeholder="Password" value="password1" required>
-    </div>
-    <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-    <p> <a href="#">Need to Register?</a></p>
-</form>
+</div>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const loginForm = document.getElementById('user-login');
-    if (!loginForm) return;
-    loginForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const email = document.getElementById('emailAddressID').value;
-        const password = document.getElementById('passwordID').value;
-        if (email === 'wmitty@email.com' && password === 'password1') {
-            localStorage.setItem('loggedIn', '1');
-            // use route path
-            window.location.href = '/shop';
-        } else {
-            localStorage.setItem('loggedIn', '0');
-            alert('Invalid login details');
-            const el = document.getElementById('loginerror');
-            if (el) el.style.display = 'block';
-        }
+    document.addEventListener('DOMContentLoaded', () => {
+        const loginForm = document.getElementById('user-login');
+        if (!loginForm) return;
+
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const email = document.getElementById('emailAddressID').value;
+            const password = document.getElementById('passwordID').value;
+
+            if (email === 'wmitty@email.com' && password === 'password1') {
+                localStorage.setItem('loggedIn', '1');
+                window.location.href = '/shop';
+            } else {
+                localStorage.setItem('loggedIn', '0');
+                const errorEl = document.getElementById('loginerror');
+                if (errorEl) errorEl.style.display = 'block';
+            }
+        });
     });
-});
 </script>
