@@ -1,92 +1,125 @@
 <h1>User Details</h1>
-    <div>    
-   
-            <form name="userdetails" id="udetails" action="" method="get">
-             
-           
-                    <div class="form-group">
-                        <label for="getFirstName">First name</label>
-                        <input type="text" class="form-control" id="firstNameID" name="firstname" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="getLastName">Last name</label> 
-                        <input type="text" class="form-control" id="lastNameID" name="lastname" required>
-                    </div>    
-                    <div class="form-group">
-                        <label for="getDOB">Date of Birth</label> 
-                        <input type="date" class="form-control" id="dobID" name="dob" required>
-                    </div>  
-                 
-                
-        
-    
-                        <label for="address1ID">Address 1</label> 
-                        <input type="text" class="form-control" id="address1ID" name="address1" required>
-          
-    
-                        <label for="address2ID">Address 2</label> 
-                        <input type="text" class="form-control" id="address2ID" name="address2" required>
-                 
-            
-                        <label for="address3ID">Address 3</label> 
-                        <input type="text" class="form-control" id="address3ID" name="address3" required>
-                
-              
-         
-                    <input type='submit' value="Update My Details">
-    
-            </form>
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <form name="userdetails" id="udetails" action="" method="get" class="p-4 border rounded shadow-sm">
+
+            <div class="form-group mb-3">
+                <label for="getFirstName">First name</label>
+                <input type="text" class="form-control" id="firstNameID" name="firstname" required>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="getLastName">Last name</label>
+                <input type="text" class="form-control" id="lastNameID" name="lastname" required>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="getEmail">Email Address</label>
+                <input type="email" class="form-control" id="emailID" name="email" required>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="getPhone">Phone Number</label>
+                <input type="tel" class="form-control" id="phoneID" name="phone">
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="getDOB">Date of Birth</label>
+                <input type="date" class="form-control" id="dobID" name="dob" required>
+            </div>
 
 
-   
+            <div class="form-group mb-3">
+                <label for="address1ID">Address 1</label>
+                <input type="text" class="form-control" id="address1ID" name="address1" required>
+            </div>
+
+
+            <div class="form-group mb-3">
+                <label for="address2ID">Address 2</label>
+                <input type="text" class="form-control" id="address2ID" name="address2" required>
+            </div>
+
+
+            <div class="form-group mb-4">
+                <label for="address3ID">Address 3</label>
+                <input type="text" class="form-control" id="address3ID" name="address3" required>
+            </div>
+
+
+
+            <input type='submit' value="Update My Details" class="btn btn-primary w-100">
+
+        </form>
     </div>
+</div>
 
 <script>
-    // userdetails.js
+    // Define a function to safely retrieve user details, providing a default if missing
+    function getUserDetails() {
+        const defaultDetails = {
+            firstName: "Walter",
+            lastName: "Mitty",
+            email: "petalpoetry@email.com", 
+            phone: "+353871234567",         
+            dob: "1990-12-01",
+            address1: "Buenos Ayres Drive",
+            address2: "Strandhill",
+            address3: "Co. Sligo"
+        };
 
-if (localStorage.getItem('userdetails') === null) {  
-    // if userdetails is null, that means it has not been loaded before. we not initialise userdetails object
-    var userDetails = {firstName:"Walter", lastName:"Mitty", dob:"1990-12-01",address1:"Buenos Ayres Drive", address2:"Strandhill", address3:"Co. Sligo"};
-    // now we store the userdetails object as a localstorage object but localstore only stores text and userdetails is a javascript object
-    // we convert a javascript object ot a string using JSON.stringify - we are being expedient!
-    document.getElementById("firstNameID").setAttribute('value',userDetails.firstName);
-    document.getElementById("lastNameID").setAttribute('value',userDetails.lastName);
-      localStorage.setItem('userdetails',JSON.stringify(userDetails));
-  document.getElementById("dobID").setAttribute('value',userDetails.dob);
-    document.getElementById("address1ID").setAttribute('value',userDetails.address1);       
-    document.getElementById("address2ID").setAttribute('value',userDetails.address2);
-    document.getElementById("address3ID").setAttribute('value',userDetails.address3);
-} else {
-    // if localstorage variable userdetails is already created - load it to javascript oject. 
-    // JSON.parse turns it back into an javascript object
-    userDetails=JSON.parse(localStorage.getItem('userdetails'));
-    document.getElementById("firstNameID").setAttribute('value',userDetails.firstName);
-    document.getElementById("lastNameID").setAttribute('value',userDetails.lastName);
-    document.getElementById("dobID").setAttribute('value',userDetails.dob);
-    document.getElementById("address1ID").setAttribute('value',userDetails.address1);      
-    document.getElementById("address2ID").setAttribute('value',userDetails.address2);
-    document.getElementById("address3ID").setAttribute('value',userDetails.address3);
-}
+        let userDetails = defaultDetails;
+        const storedDetails = localStorage.getItem('userdetails');
+
+        if (storedDetails) {
+            try {
+                // Load existing data
+                const savedDetails = JSON.parse(storedDetails);
+
+                // Merge saved data with defaults, so any missing new fields get the default value
+                userDetails = { ...defaultDetails, ...savedDetails };
+
+            } catch (e) {
+                console.error("Error parsing stored user details. Using defaults.", e);
+            }
+        } else {
+            // Save the new complete default object to local storage if it was null
+            localStorage.setItem('userdetails', JSON.stringify(userDetails));
+        }
+
+        return userDetails;
+    }
+
+    const userDetails = getUserDetails();
+
+    // Now, load the values into the form fields
+    document.getElementById("firstNameID").setAttribute('value', userDetails.firstName || "");
+    document.getElementById("lastNameID").setAttribute('value', userDetails.lastName || "");
+    document.getElementById("emailID").setAttribute('value', userDetails.email || ""); 
+    document.getElementById("phoneID").setAttribute('value', userDetails.phone || ""); 
+    document.getElementById("dobID").setAttribute('value', userDetails.dob || "");
+    document.getElementById("address1ID").setAttribute('value', userDetails.address1 || "");
+    document.getElementById("address2ID").setAttribute('value', userDetails.address2 || "");
+    document.getElementById("address3ID").setAttribute('value', userDetails.address3 || "");
 
 
+    // Update logic for form submission remains the same (collects all fields)
+    document.getElementById('udetails').addEventListener('submit', (event) => {
 
-document.getElementById('udetails').addEventListener('submit', (event) => {
+        // if the user updates the user details - we update the userDetails javascript object
+        var userDetails = {};
+        userDetails.firstName = document.getElementById('firstNameID').value;
+        userDetails.lastName = document.getElementById('lastNameID').value;
+        userDetails.email = document.getElementById('emailID').value; // Saved
+        userDetails.phone = document.getElementById('phoneID').value; // Saved
+        userDetails.dob = document.getElementById('dobID').value;
+        userDetails.address1 = document.getElementById('address1ID').value;
+        userDetails.address2 = document.getElementById('address2ID').value;
+        userDetails.address3 = document.getElementById('address3ID').value;
 
-    // if the user updates the user details - we update the userDetails javascript object
-    var userDetails={};
-    userDetails.firstName=document.getElementById('firstNameID').value;
-    userDetails.lastName=document.getElementById('lastNameID').value;
-    userDetails.dob=document.getElementById('dobID').value;
-    userDetails.address1=document.getElementById('address1ID').value;   
-    userDetails.address2=document.getElementById('address2ID').value;
-    userDetails.address3=document.getElementById('address3ID').value; 
-  
-    // finally we convert the javascript object to a string with JSON.stringify and save it to localstorage
-    localStorage.setItem('userdetails',JSON.stringify(userDetails));
+        // finally we convert the javascript object to a string with JSON.stringify and save it to localstorage
+        localStorage.setItem('userdetails', JSON.stringify(userDetails));
 
-    event.preventDefault();
-
-
-})
-
+        event.preventDefault();
+    })
 </script>
