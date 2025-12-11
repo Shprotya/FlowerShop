@@ -122,21 +122,47 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const loginForm = document.getElementById('user-login');
+        const emailInput = document.getElementById('emailAddressID');
+        const passwordInput = document.getElementById('passwordID');
+        const rememberMeCheckbox = document.getElementById('rememberMe');
+        
         if (!loginForm) return;
+
+        // Check if there's a saved email when page loads
+        const savedEmail = localStorage.getItem('rememberedEmail');
+        if (savedEmail) {
+            emailInput.value = savedEmail;
+            rememberMeCheckbox.checked = true;
+        }
 
         loginForm.addEventListener('submit', (event) => {
             event.preventDefault();
 
-            const email = document.getElementById('emailAddressID').value;
-            const password = document.getElementById('passwordID').value;
+            const email = emailInput.value;
+            const password = passwordInput.value;
+            const rememberMe = rememberMeCheckbox.checked;
 
             if (email === 'petalpoetry@email.com' && password === 'pass123') {
+                // Save or remove email based on "Remember me" checkbox
+                if (rememberMe) {
+                    localStorage.setItem('rememberedEmail', email);
+                } else {
+                    localStorage.removeItem('rememberedEmail');
+                }
+                
                 localStorage.setItem('loggedIn', '1');
                 window.location.href = '/shop';
             } else {
                 localStorage.setItem('loggedIn', '0');
                 const errorEl = document.getElementById('loginerror');
                 if (errorEl) errorEl.style.display = 'block';
+            }
+        });
+
+        // Clear saved email if user unchecks "Remember me" before submitting
+        rememberMeCheckbox.addEventListener('change', (e) => {
+            if (!e.target.checked) {
+                localStorage.removeItem('rememberedEmail');
             }
         });
     });
