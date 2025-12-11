@@ -20,6 +20,15 @@ form {
   margin: 10px;
 }
 
+.card-header {
+  background-color: #fef7f0;
+  border-bottom: 2px solid #CE5E5B;
+}
+.card-header h4 {
+  color: #CE5E5B;
+  font-weight: 600;
+}
+
 .navbar {
   background-color: #fef7f0;
 }

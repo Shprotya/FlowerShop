@@ -25,6 +25,16 @@ form {
     margin: 10px;
 }
 
+.card-header {
+    background-color: $soft-peach;
+    border-bottom: 2px solid $dusty-rose;
+
+    h4 {
+        color: $dusty-rose;
+        font-weight: 600;
+    }
+}
+
 .navbar {
     background-color: $soft-peach;
 

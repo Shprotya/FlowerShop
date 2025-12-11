@@ -1,56 +1,86 @@
-<h1>User Details</h1>
-<div class="row justify-content-center">
-    <div class="col-md-8">
-        <form name="userdetails" id="udetails" action="" method="get" class="p-4 border rounded shadow-sm">
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
 
-            <div class="form-group mb-3">
-                <label for="getFirstName">First name</label>
-                <input type="text" class="form-control" id="firstNameID" name="firstname" required>
-            </div>
+            <h1 class="mb-4 text-center">Your Account Details</h1>
+            <p class="text-center text-muted mb-5">Manage your personal information and delivery preferences.</p>
 
-            <div class="form-group mb-3">
-                <label for="getLastName">Last name</label>
-                <input type="text" class="form-control" id="lastNameID" name="lastname" required>
-            </div>
+            <form name="userdetails" id="udetails" action="" method="get" class="needs-validation" novalidate>
 
-            <div class="form-group mb-3">
-                <label for="getEmail">Email Address</label>
-                <input type="email" class="form-control" id="emailID" name="email" required>
-            </div>
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header">
+                        <h4 class="mb-0">Personal Information</h4>
+                    </div>
+                    <div class="card-body">
 
-            <div class="form-group mb-3">
-                <label for="getPhone">Phone Number</label>
-                <input type="tel" class="form-control" id="phoneID" name="phone">
-            </div>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="firstNameID" class="form-label">First name *</label>
+                                <input type="text" class="form-control" id="firstNameID" name="firstname" required>
+                                <div class="invalid-feedback">Please enter your first name.</div>
+                            </div>
 
-            <div class="form-group mb-3">
-                <label for="getDOB">Date of Birth</label>
-                <input type="date" class="form-control" id="dobID" name="dob" required>
-            </div>
+                            <div class="col-md-6">
+                                <label for="lastNameID" class="form-label">Last name *</label>
+                                <input type="text" class="form-control" id="lastNameID" name="lastname" required>
+                                <div class="invalid-feedback">Please enter your last name.</div>
+                            </div>
 
+                            <div class="col-md-6">
+                                <label for="emailID" class="form-label">Email Address *</label>
+                                <input type="email" class="form-control" id="emailID" name="email" required>
+                                <div class="invalid-feedback">Please enter a valid email address.</div>
+                            </div>
 
-            <div class="form-group mb-3">
-                <label for="address1ID">Address 1</label>
-                <input type="text" class="form-control" id="address1ID" name="address1" required>
-            </div>
+                            <div class="col-md-6">
+                                <label for="phoneID" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="phoneID" name="phone">
+                            </div>
 
+                            <div class="col-12">
+                                <label for="dobID" class="form-label">Date of Birth *</label>
+                                <input type="date" class="form-control" id="dobID" name="dob" required>
+                                <div class="invalid-feedback">Please select your date of birth.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="form-group mb-3">
-                <label for="address2ID">Address 2</label>
-                <input type="text" class="form-control" id="address2ID" name="address2" required>
-            </div>
+                <div class="card shadow-sm mb-5">
+                    <div class="card-header">
+                        <h4 class="mb-0">Delivery Address</h4>
+                    </div>
+                    <div class="card-body">
 
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label for="address1ID" class="form-label">Address Line 1 *</label>
+                                <input type="text" class="form-control" id="address1ID" name="address1" required>
+                                <div class="invalid-feedback">Please enter Address Line 1.</div>
+                            </div>
 
-            <div class="form-group mb-4">
-                <label for="address3ID">Address 3</label>
-                <input type="text" class="form-control" id="address3ID" name="address3" required>
-            </div>
+                            <div class="col-12">
+                                <label for="address2ID" class="form-label">Address Line 2</label>
+                                <input type="text" class="form-control" id="address2ID" name="address2">
+                            </div>
 
+                            <div class="col-12">
+                                <label for="address3ID" class="form-label">City / County *</label>
+                                <input type="text" class="form-control" id="address3ID" name="address3" required>
+                                <div class="invalid-feedback">Please enter your City or County.</div>
+                            </div>
+                        </div>
 
+                    </div>
+                </div>
 
-            <input type='submit' value="Update My Details" class="btn btn-primary w-100">
-
-        </form>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg w-50 hover-effect">
+                        <i class="fas fa-save me-2"></i> Update My Details
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -60,8 +90,8 @@
         const defaultDetails = {
             firstName: "Walter",
             lastName: "Mitty",
-            email: "petalpoetry@email.com", 
-            phone: "+353871234567",         
+            email: "walter.mitty@life.com",
+            phone: "+353871234567",
             dob: "1990-12-01",
             address1: "Buenos Ayres Drive",
             address2: "Strandhill",
@@ -73,7 +103,6 @@
 
         if (storedDetails) {
             try {
-                // Load existing data
                 const savedDetails = JSON.parse(storedDetails);
 
                 // Merge saved data with defaults, so any missing new fields get the default value
@@ -90,36 +119,49 @@
         return userDetails;
     }
 
+    // 1. LOAD DATA ON PAGE LOAD
     const userDetails = getUserDetails();
 
     // Now, load the values into the form fields
-    document.getElementById("firstNameID").setAttribute('value', userDetails.firstName || "");
-    document.getElementById("lastNameID").setAttribute('value', userDetails.lastName || "");
-    document.getElementById("emailID").setAttribute('value', userDetails.email || ""); 
-    document.getElementById("phoneID").setAttribute('value', userDetails.phone || ""); 
-    document.getElementById("dobID").setAttribute('value', userDetails.dob || "");
-    document.getElementById("address1ID").setAttribute('value', userDetails.address1 || "");
-    document.getElementById("address2ID").setAttribute('value', userDetails.address2 || "");
-    document.getElementById("address3ID").setAttribute('value', userDetails.address3 || "");
+    document.getElementById("firstNameID").value = userDetails.firstName || "";
+    document.getElementById("lastNameID").value = userDetails.lastName || "";
+    document.getElementById("emailID").value = userDetails.email || "";
+    document.getElementById("phoneID").value = userDetails.phone || "";
+    document.getElementById("dobID").value = userDetails.dob || "";
+    document.getElementById("address1ID").value = userDetails.address1 || "";
+    document.getElementById("address2ID").value = userDetails.address2 || "";
+    document.getElementById("address3ID").value = userDetails.address3 || "";
 
 
-    // Update logic for form submission remains the same (collects all fields)
+    // 2. SAVE DATA ON FORM SUBMISSION
     document.getElementById('udetails').addEventListener('submit', (event) => {
+        event.preventDefault();
 
-        // if the user updates the user details - we update the userDetails javascript object
+        // Basic form validation check (Bootstrap style)
+        const form = document.getElementById('udetails');
+        if (!form.checkValidity()) {
+            event.stopPropagation();
+            form.classList.add('was-validated');
+            return;
+        }
+
+        // Collect and update userDetails object
         var userDetails = {};
         userDetails.firstName = document.getElementById('firstNameID').value;
         userDetails.lastName = document.getElementById('lastNameID').value;
-        userDetails.email = document.getElementById('emailID').value; // Saved
-        userDetails.phone = document.getElementById('phoneID').value; // Saved
+        userDetails.email = document.getElementById('emailID').value;
+        userDetails.phone = document.getElementById('phoneID').value;
         userDetails.dob = document.getElementById('dobID').value;
         userDetails.address1 = document.getElementById('address1ID').value;
         userDetails.address2 = document.getElementById('address2ID').value;
         userDetails.address3 = document.getElementById('address3ID').value;
 
-        // finally we convert the javascript object to a string with JSON.stringify and save it to localstorage
+        // Save the updated object to localstorage
         localStorage.setItem('userdetails', JSON.stringify(userDetails));
 
-        event.preventDefault();
-    })
+        alert("Your details have been successfully updated!");
+
+        // Optional: Reset validation state after successful submission
+        form.classList.remove('was-validated');
+    });
 </script>
