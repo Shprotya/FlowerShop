@@ -26,9 +26,9 @@
                             <div class="mb-3">
                                 <label for="emailAddressID" class="form-label">
                                     <i class="fas fa-envelope me-2"></i>Email address
-                                </label>
+                                </label>    
                                 <input type="email" class="form-control form-control-lg" id="emailAddressID"
-                                    placeholder="Enter your email" value="wmitty@email.com" required>
+                                    placeholder="Enter your email" required>
                                 <small class="form-text text-muted">
                                     We'll never share your email with anyone else.
                                 </small>
@@ -39,7 +39,7 @@
                                     <i class="fas fa-lock me-2"></i>Password
                                 </label>
                                 <input type="password" class="form-control form-control-lg" id="passwordID"
-                                    placeholder="Enter your password" value="password1" required>
+                                    placeholder="Enter your password" required>
                             </div>
 
                             <div class="d-flex justify-content-between align-items-center mb-4">
@@ -111,7 +111,7 @@
                 <div class="alert alert-info mt-4 text-center">
                     <small>
                         <strong><i class="fas fa-info-circle me-1"></i>Test credentials:</strong><br>
-                        Email: wmitty@email.com | Password: password1
+                        Email: petalpoetry@email.com | Password: pass123
                     </small>
                 </div>
             </div>
@@ -130,7 +130,7 @@
             const email = document.getElementById('emailAddressID').value;
             const password = document.getElementById('passwordID').value;
 
-            if (email === 'wmitty@email.com' && password === 'password1') {
+            if (email === 'petalpoetry@email.com' && password === 'pass123') {
                 localStorage.setItem('loggedIn', '1');
                 window.location.href = '/shop';
             } else {

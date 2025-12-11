@@ -1,0 +1,240 @@
+<div class="contact-page">
+    <!-- Hero Section -->
+    <div class="contact-hero text-center py-5">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-3">Get In Touch</h1>
+            <p class="lead">We'd love to hear from you. Drop us a message!</p>
+        </div>
+    </div>
+
+    <!-- Contact Content -->
+    <div class="container my-5">
+        <div class="row g-4">
+            <!-- Contact Information Cards -->
+            <div class="col-lg-4">
+                <h3 class="mb-4">Contact Information</h3>
+
+                <!-- Address Card -->
+                <div class="card contact-card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="contact-icon me-3">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h5 class="card-title">Visit Us</h5>
+                                <p class="card-text mb-0">
+                                    123 Bloom Street<br>
+                                    Dublin 2, D02 XY45<br>
+                                    Ireland
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phone Card -->
+                <div class="card contact-card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="contact-icon me-3">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h5 class="card-title">Call Us</h5>
+                                <p class="card-text mb-0">
+                                    <a href="tel:+35312345678" class="text-decoration-none">+353 1 234 5678</a><br>
+                                    <a href="tel:+353871234567" class="text-decoration-none">+353 87 123 4567</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Email Card -->
+                <div class="card contact-card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="contact-icon me-3">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h5 class="card-title">Email Us</h5>
+                                <p class="card-text mb-0">
+                                    <a href="mailto:info@petalpoetry.ie"
+                                        class="text-decoration-none">info@petalpoetry.ie</a><br>
+                                    <a href="mailto:orders@petalpoetry.ie"
+                                        class="text-decoration-none">orders@petalpoetry.ie</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Opening Hours Card -->
+                <div class="card contact-card mb-4">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="contact-icon me-3">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h5 class="card-title">Opening Hours</h5>
+                                <div class="card-text">
+                                    <p class="mb-2"><strong>Monday - Friday:</strong><br>9:00 AM - 6:00 PM</p>
+                                    <p class="mb-2"><strong>Saturday:</strong><br>9:00 AM - 5:00 PM</p>
+                                    <p class="mb-0"><strong>Sunday:</strong><br>10:00 AM - 4:00 PM</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Media -->
+                <div class="text-center">
+                    <h5 class="mb-3">Follow Us</h5>
+                    <div class="social-links d-flex justify-content-center gap-2">
+                        <a href="#" class="btn btn-outline-primary rounded-circle social-btn">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-primary rounded-circle social-btn">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-primary rounded-circle social-btn">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-primary rounded-circle social-btn">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="col-lg-8">
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <h3 class="mb-3">Send Us a Message</h3>
+                        <p class="text-muted mb-4">Fill out the form below and we'll get back to you within 24 hours.
+                        </p>
+
+                        <div id="formSuccess" class="alert alert-success d-none" role="alert">
+                            <i class="fas fa-check-circle me-2"></i>
+                            <strong>Thank you!</strong> Your message has been sent successfully. We'll get back to you
+                            soon.
+                        </div>
+
+                        <form id="contactForm">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="firstName" class="form-label">First Name *</label>
+                                    <input type="text" class="form-control" id="firstName" placeholder="John" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="lastName" class="form-label">Last Name *</label>
+                                    <input type="text" class="form-control" id="lastName" placeholder="Doe" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Email Address *</label>
+                                    <input type="email" class="form-control" id="email" placeholder="john@example.com"
+                                        required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" id="phone" placeholder="+353 87 123 4567">
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="subject" class="form-label">Subject *</label>
+                                    <select class="form-select" id="subject" required>
+                                        <option value="">Choose a subject...</option>
+                                        <option value="general">General Inquiry</option>
+                                        <option value="order">Order Information</option>
+                                        <option value="delivery">Delivery Question</option>
+                                        <option value="custom">Custom Arrangement</option>
+                                        <option value="complaint">Complaint</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="message" class="form-label">Message *</label>
+                                    <textarea class="form-control" id="message" rows="6"
+                                        placeholder="Tell us how we can help you..." required></textarea>
+                                    <div class="form-text">Please provide as much detail as possible.</div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="newsletter">
+                                        <label class="form-check-label" for="newsletter">
+                                            Subscribe to our newsletter for exclusive deals and updates
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary btn-lg px-5">
+                                        <i class="fas fa-paper-plane me-2"></i>Send Message
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map Section -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-body p-0">
+                        <h3 class="p-4 mb-0">Find Us on the Map</h3>
+                        <div class="ratio ratio-21x9">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2381.6779076064793!2d-6.260309684247!3d53.349804879982!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48670e80ea27ac2f%3A0xa00c7a9973171a0!2sDublin%2C%20Ireland!5e0!3m2!1sen!2sie!4v1234567890"
+                                style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Info Section -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="alert alert-info text-center">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>Same Day Delivery Available!</strong> Order before 2pm for same-day delivery across Dublin.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Show success message
+        const successAlert = document.getElementById('formSuccess');
+        successAlert.classList.remove('d-none');
+
+        // Reset form
+        this.reset();
+
+        // Scroll to success message
+        successAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        // Hide success message after 5 seconds
+        setTimeout(() => {
+            successAlert.classList.add('d-none');
+        }, 5000);
+    });
+</script>

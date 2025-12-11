@@ -141,3 +141,79 @@ form {
     backdrop-filter: blur(8px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
+
+
+// Contact Page Styles
+.contact-page {
+    
+    // Hero section
+    .contact-hero {
+        background: linear-gradient(135deg, $soft-peach 0%, lighten($blush-pink, 20%) 100%);
+        
+        h1 {
+            color: $dusty-rose;
+        }
+    }
+    
+    // Contact cards
+    .contact-card {
+        border: none;
+        border-left: 4px solid $dusty-rose;
+        transition: all 0.3s ease;
+        
+        &:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        a {
+            color: $dusty-rose;
+            transition: color 0.3s ease;
+            
+            &:hover {
+                color: darken($dusty-rose, 10%);
+            }
+        }
+    }
+    
+    // Contact icons
+    .contact-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, $dusty-rose, $blush-pink);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        
+        i {
+            color: white;
+            font-size: 1.25rem;
+        }
+    }
+    
+    // Social buttons
+    .social-btn {
+        width: 45px;
+        height: 45px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-color: $dusty-rose;
+        color: $dusty-rose;
+        transition: all 0.3s ease;
+        
+        &:hover {
+            background-color: $dusty-rose;
+            border-color: $dusty-rose;
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        i {
+            font-size: 1.1rem;
+        }
+    }
+}
