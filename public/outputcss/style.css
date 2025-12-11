@@ -1,14 +1,19 @@
+.product-card, .hover-effect {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-card:hover, .hover-effect:hover {
+  transform: translateY(-5px);
+}
+
 body {
   min-height: 100vh;
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
 }
 
-.hover-effect {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
 .hover-effect:hover {
-  transform: translateY(-5px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -18,15 +23,6 @@ main {
 
 form {
   margin: 10px;
-}
-
-.card-header {
-  background-color: #fef7f0;
-  border-bottom: 2px solid #CE5E5B;
-}
-.card-header h4 {
-  color: #CE5E5B;
-  font-weight: 600;
 }
 
 .navbar {
@@ -64,11 +60,9 @@ form {
 }
 
 .product-card {
-  transition: transform 0.3s ease;
   border: 1px solid #DD8E8C;
 }
 .product-card:hover {
-  transform: translateY(-5px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .product-card img {
@@ -160,10 +154,10 @@ form {
   height: 50px;
   background: linear-gradient(135deg, #CE5E5B, #DD8E8C);
   border-radius: 50%;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
 }
 .contact-page .contact-icon i {
   color: white;

@@ -2,17 +2,37 @@ $soft-peach: #fef7f0;
 $dusty-rose: #CE5E5B;
 $blush-pink: #DD8E8C;
 
+// Mixins & Placeholders
+
+// Placeholder for a common element lift/shadow on hover
+%smooth-rise {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    &:hover {
+        transform: translateY(-5px);
+    }
+}
+
+// Mixin for centralizing content using flex
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// Base styles
+
 body {
     min-height: 100vh;
-    display: flex;
+    @include flex-center; // Using mixin for body centering if needed, though often vertical centering is more complex
     flex-direction: column;
 }
 
+// Applies the smooth rise effect across multiple elements
 .hover-effect {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-
+    @extend %smooth-rise;
+    
     &:hover {
-        transform: translateY(-5px);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 }
@@ -23,16 +43,6 @@ main {
 
 form {
     margin: 10px;
-}
-
-.card-header {
-    background-color: $soft-peach;
-    border-bottom: 2px solid $dusty-rose;
-
-    h4 {
-        color: $dusty-rose;
-        font-weight: 600;
-    }
 }
 
 .navbar {
@@ -62,7 +72,6 @@ form {
 
     // Newsletter specific styling for the input field
     .newsletter-input {
-
         color: $dusty-rose;
         padding: 0.75rem 1rem;
 
@@ -76,13 +85,14 @@ form {
     }
 }
 
+// card and button styles
+
 // Product cards
 .product-card {
-    transition: transform 0.3s ease;
+    @extend %smooth-rise; // Uses the common hover effect
     border: 1px solid $blush-pink;
 
     &:hover {
-        transform: translateY(-5px);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
@@ -101,6 +111,8 @@ form {
         border-color: darken($dusty-rose, 10%);
     }
 }
+
+// page specific styles
 
 #heroCarousel {
     .carousel-item {
@@ -140,7 +152,6 @@ form {
         backdrop-filter: blur(5px);
         z-index: 0;
     }
-    
 }
 
 // Benefit boxes with glass effect
@@ -192,10 +203,8 @@ form {
         height: 50px;
         background: linear-gradient(135deg, $dusty-rose, $blush-pink);
         border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         flex-shrink: 0;
+        @include flex-center; 
         
         i {
             color: white;
@@ -208,9 +217,7 @@ form {
         width: 45px;
         height: 45px;
         padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        @include flex-center; 
         border-color: $dusty-rose;
         color: $dusty-rose;
         transition: all 0.3s ease;
