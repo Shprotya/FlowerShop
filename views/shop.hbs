@@ -1,35 +1,100 @@
-<div>
-  <div>
-    <h2>
-      Product 1
-    </h2>
-    <div>
-      <img src="https://placehold.co/200x200" />
-      <a href="#" class="add-to-cart">Add to Cart</a>
+<div class="container my-5">
+    <!-- Page Header -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 mb-3">Our Flower Collection</h1>
+        <p class="lead text-muted">Browse our beautiful selection of fresh flowers and arrangements</p>
     </div>
 
-    <div>
-      <h2>
-        Product 2
-      </h2>
-      <div>
-        <img src="https://placehold.co/200x200" />
-        <a href="#" class="add-to-cart">Add to Cart</a>
-      </div>
+    <!-- Products Grid -->
+    <div class="row g-4">
+        {{#each products}}
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+            <div class="card product-card h-100">
+                <img src="{{this.image}}" class="card-img-top" alt="{{this.name}}">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{this.name}}</h5>
+                    <p class="card-text flex-grow-1">{{this.description}}</p>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="fw-bold fs-4 text-success">€{{this.price}}</span>
+                        <span class="badge bg-secondary">{{this.category}}</span>
+                    </div>
+                    <button class="btn btn-primary w-100 add-to-cart" 
+                            data-id="{{this.id}}" 
+                            data-name="{{this.name}}" 
+                            data-price="{{this.price}}">
+                        <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+        {{/each}}
     </div>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const buttons = document.querySelectorAll('.add-to-cart');
-        buttons.forEach(btn => {
-          btn.addEventListener('click', (ev) => {
+    <!-- Empty State (if no products) -->
+    {{#unless products}}
+    <div class="text-center py-5">
+        <i class="fas fa-flower fa-4x text-muted mb-3"></i>
+        <h3>No products available</h3>
+        <p class="text-muted">Check back soon for our beautiful flower arrangements!</p>
+    </div>
+    {{/unless}}
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.add-to-cart');
+    
+    buttons.forEach(btn => {
+        btn.addEventListener('click', (ev) => {
             ev.preventDefault();
+            
+            // Get product details
+            const productId = btn.dataset.id;
+            const productName = btn.dataset.name;
+            const productPrice = btn.dataset.price;
+            
+            // Update cart count
             let total = parseInt(localStorage.getItem('checkout') || '0', 10);
             total = total + 1;
             localStorage.setItem('checkout', total);
+            
+            // Update cart count in navbar
             const checkoutSpan = document.querySelector('#checkout');
             if (checkoutSpan) checkoutSpan.innerHTML = total;
-          });
+            
+            // Visual feedback - button animation
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check me-2"></i>Added!';
+            btn.classList.remove('btn-primary');
+            btn.classList.add('btn-success');
+            btn.disabled = true;
+            
+            // Reset button after 1.5 seconds
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.classList.remove('btn-success');
+                btn.classList.add('btn-primary');
+                btn.disabled = false;
+            }, 1500);
+            
+            // Optional: Store cart items for later use
+            // This is for future enhancement - showing items in checkout
+            let cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+            const existingItem = cartItems.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cartItems.push({
+                    id: productId,
+                    name: productName,
+                    price: parseFloat(productPrice),
+                    quantity: 1
+                });
+            }
+            
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
         });
-      });
-    </script>
+    });
+});
+</script>
