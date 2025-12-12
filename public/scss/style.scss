@@ -40,7 +40,14 @@ main {
     flex: 1;
 }
 
-.fas, .modal-title {
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.fas,
+.modal-title {
     color: $dusty-rose;
 }
 
