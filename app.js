@@ -2,6 +2,9 @@
 const express = require('express');
 // load handlebars
 const exphbs = require('express-handlebars');
+// for reading JSON files
+const fs = require('fs');
+
 
 // instantiate express
 const app = express();
@@ -48,10 +51,15 @@ app.get('/', (req, res) => {
 app.get('/shop', (req, res) => {
     const state = { home: false, shop: true, about: false, contact: false, login: false, checkout: false };
     const head = {
-        title: "Shop - Petal Poetry", description: "Browse our flower collection",
+        title: "Shop - Petal Poetry", 
+        description: "Browse our flower collection",
         keywords: "flower shop, buy flowers, floral arrangements, bouquets"
     };
-    res.render('shop', { state: state, head: head });
+    
+    // Load products from JSON file
+    const products = JSON.parse(fs.readFileSync('./public/data/products.json', 'utf8'));
+    
+    res.render('shop', { state: state, head: head, products: products });
     console.log('shop');
 });
 

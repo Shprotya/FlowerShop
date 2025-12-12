@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "name": "Classic Rose Bouquet",
+        "description": "12 stunning red roses with fresh greenery, perfect for romantic occasions",
+        "price": 35.99,
+        "image": "images/roses.jpg",
+        "category": "bouquets"
+    },
+    {
+        "id": 2,
+        "name": "Spring Tulip Mix",
+        "description": "Colorful assortment of fresh tulips in pink, yellow and red",
+        "price": 28.99,
+        "image": "images/tulips.jpg",
+        "category": "bouquets"
+    },
+    {
+        "id": 3,
+        "name": "Elegant Orchid Plant",
+        "description": "Beautiful purple orchid in decorative ceramic pot, long-lasting beauty",
+        "price": 42.99,
+        "image": "images/orchid.jpg",
+        "category": "plants"
+    },
+    {
+        "id": 4,
+        "name": "Sunflower Delight",
+        "description": "Bright sunflowers to light up any room with happiness and warmth",
+        "price": 25.99,
+        "image": "images/sunflowers.jpg",
+        "category": "bouquets"
+    },
+    {
+        "id": 5,
+        "name": "Romantic Mixed Bouquet",
+        "description": "Elegant mix of roses, lilies, and carnations in soft pastel colors",
+        "price": 45.99,
+        "image": "images/romantic.jpg",
+        "category": "bouquets"
+    },
+    {
+        "id": 6,
+        "name": "Wedding Deluxe Package",
+        "description": "Complete floral package for your special day - bridal bouquet and decorations",
+        "price": 299.99,
+        "image": "images/wedding1.jpg",
+        "category": "special"
+    }
+]
