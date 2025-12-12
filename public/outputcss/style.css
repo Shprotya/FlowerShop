@@ -7,9 +7,6 @@
 
 body {
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
 }
 
@@ -57,6 +54,15 @@ form {
 }
 .footer .newsletter-button {
   padding: 0.75rem 1rem;
+}
+
+.card-header {
+  background-color: #fef7f0;
+  border-bottom: 2px solid #CE5E5B;
+}
+.card-header h4 {
+  color: #CE5E5B;
+  font-weight: 600;
 }
 
 .product-card {
