@@ -1,100 +1,193 @@
 <div class="container my-5">
-    <!-- Page Header -->
-    <div class="text-center mb-5">
-        <h1 class="display-4 mb-3">Our Flower Collection</h1>
-        <p class="lead text-muted">Browse our beautiful selection of fresh flowers and arrangements</p>
+  <!-- Page Header -->
+  <div class="text-center mb-5">
+    <h1 class="display-4 mb-3">Our Flower Collection</h1>
+    <p class="lead text-muted">Browse our beautiful selection of fresh flowers and arrangements</p>
+  </div>
+
+  <!-- Filter & Sort Controls -->
+  <div class="row mb-4">
+    <!-- Category Filter -->
+    <div class="col-md-6 mb-3">
+      <label for="categoryFilter" class="form-label fw-bold">
+        <i class="fas fa-filter me-2"></i>Filter by Category:
+      </label>
+      <select id="categoryFilter" class="form-select">
+        <option value="all">All Products</option>
+        <option value="bouquets">Bouquets</option>
+        <option value="wedding">Wedding Flowers</option>
+        <option value="plants">Plants</option>
+        <option value="gifts">Gifts</option>
+      </select>
     </div>
 
-    <!-- Products Grid -->
-    <div class="row g-4">
-        {{#each products}}
-        <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-            <div class="card product-card h-100">
-                <img src="{{this.image}}" class="card-img-top" alt="{{this.name}}">
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">{{this.name}}</h5>
-                    <p class="card-text flex-grow-1">{{this.description}}</p>
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="fw-bold fs-4 text-success">€{{this.price}}</span>
-                        <span class="badge bg-secondary">{{this.category}}</span>
-                    </div>
-                    <button class="btn btn-primary w-100 add-to-cart" 
-                            data-id="{{this.id}}" 
-                            data-name="{{this.name}}" 
-                            data-price="{{this.price}}">
-                        <i class="fas fa-cart-plus me-2"></i>Add to Cart
-                    </button>
-                </div>
-            </div>
+    <!-- Sort Options -->
+    <div class="col-md-6 mb-3">
+      <label for="sortSelect" class="form-label fw-bold">
+        <i class="fas fa-sort me-2"></i>Sort by:
+      </label>
+      <select id="sortSelect" class="form-select">
+        <option value="default">Default</option>
+        <option value="price-low">Price: Low to High</option>
+        <option value="price-high">Price: High to Low</option>
+        <option value="name">Name: A to Z</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Product Count -->
+  <div class="mb-3">
+    <p class="text-muted">
+      Showing <span id="productCount">{{products.length}}</span> products
+    </p>
+  </div>
+
+  <!-- Products Grid -->
+  <div class="row g-4" id="productsContainer">
+    {{#each products}}
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 product-item" data-category="{{this.category}}"
+      data-price="{{this.price}}" data-name="{{this.name}}" data-id="{{this.id}}">
+      <div class="card product-card h-100">
+        <img src="{{this.image}}" class="card-img-top" alt="{{this.name}}">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{this.name}}</h5>
+          <p class="card-text flex-grow-1">{{this.description}}</p>
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="fw-bold fs-4 text-success">€{{this.price}}</span>
+            <span class="badge bg-secondary text-capitalize">{{this.category}}</span>
+          </div>
+          {{#if this.featured}}
+          <div class="mb-2">
+            <span class="badge bg-warning text-dark">
+              <i class="fas fa-star me-1"></i>Featured
+            </span>
+          </div>
+          {{/if}}
+          <button class="btn btn-primary w-100 add-to-cart" data-id="{{this.id}}" data-name="{{this.name}}"
+            data-price="{{this.price}}">
+            <i class="fas fa-cart-plus me-2"></i>Add to Cart
+          </button>
         </div>
-        {{/each}}
+      </div>
     </div>
+    {{/each}}
+  </div>
 
-    <!-- Empty State (if no products) -->
-    {{#unless products}}
-    <div class="text-center py-5">
-        <i class="fas fa-flower fa-4x text-muted mb-3"></i>
-        <h3>No products available</h3>
-        <p class="text-muted">Check back soon for our beautiful flower arrangements!</p>
-    </div>
-    {{/unless}}
+  <!-- No Results Message -->
+  <div id="noResults" class="text-center py-5 d-none">
+    <i class="fas fa-search fa-4x text-muted mb-3"></i>
+    <h3>No products found</h3>
+    <p class="text-muted">Try selecting a different category or sorting option</p>
+  </div>
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const buttons = document.querySelectorAll('.add-to-cart');
-    
-    buttons.forEach(btn => {
-        btn.addEventListener('click', (ev) => {
-            ev.preventDefault();
-            
-            // Get product details
-            const productId = btn.dataset.id;
-            const productName = btn.dataset.name;
-            const productPrice = btn.dataset.price;
-            
-            // Update cart count
-            let total = parseInt(localStorage.getItem('checkout') || '0', 10);
-            total = total + 1;
-            localStorage.setItem('checkout', total);
-            
-            // Update cart count in navbar
-            const checkoutSpan = document.querySelector('#checkout');
-            if (checkoutSpan) checkoutSpan.innerHTML = total;
-            
-            // Visual feedback - button animation
-            const originalHTML = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-check me-2"></i>Added!';
-            btn.classList.remove('btn-primary');
-            btn.classList.add('btn-success');
-            btn.disabled = true;
-            
-            // Reset button after 1.5 seconds
-            setTimeout(() => {
-                btn.innerHTML = originalHTML;
-                btn.classList.remove('btn-success');
-                btn.classList.add('btn-primary');
-                btn.disabled = false;
-            }, 1500);
-            
-            // Optional: Store cart items for later use
-            // This is for future enhancement - showing items in checkout
-            let cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-            const existingItem = cartItems.find(item => item.id === productId);
-            
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                cartItems.push({
-                    id: productId,
-                    name: productName,
-                    price: parseFloat(productPrice),
-                    quantity: 1
-                });
-            }
-            
-            localStorage.setItem('cartItems', JSON.stringify(cartItems));
-        });
+  document.addEventListener('DOMContentLoaded', () => {
+    const categoryFilter = document.getElementById('categoryFilter');
+    const sortSelect = document.getElementById('sortSelect');
+    const productsContainer = document.getElementById('productsContainer');
+    const productItems = Array.from(document.querySelectorAll('.product-item'));
+    const productCount = document.getElementById('productCount');
+    const noResults = document.getElementById('noResults');
+
+    // Filter by Category
+    categoryFilter.addEventListener('change', () => {
+      filterAndSort();
     });
-});
+
+    // Sort Products
+    sortSelect.addEventListener('change', () => {
+      filterAndSort();
+    });
+
+    function filterAndSort() {
+      const category = categoryFilter.value;
+      const sortType = sortSelect.value;
+
+      // Filter products
+      let visibleItems = productItems.filter(item => {
+        if (category === 'all') return true;
+        return item.dataset.category === category;
+      });
+
+      // Sort products
+      if (sortType === 'price-low') {
+        visibleItems.sort((a, b) => parseFloat(a.dataset.price) - parseFloat(b.dataset.price));
+      } else if (sortType === 'price-high') {
+        visibleItems.sort((a, b) => parseFloat(b.dataset.price) - parseFloat(a.dataset.price));
+      } else if (sortType === 'name') {
+        visibleItems.sort((a, b) => a.dataset.name.localeCompare(b.dataset.name));
+      }
+
+      // Hide all items first
+      productItems.forEach(item => item.classList.add('d-none'));
+
+      // Show filtered and sorted items
+      if (visibleItems.length > 0) {
+        productsContainer.innerHTML = '';
+        visibleItems.forEach(item => {
+          item.classList.remove('d-none');
+          productsContainer.appendChild(item);
+        });
+        noResults.classList.add('d-none');
+      } else {
+        noResults.classList.remove('d-none');
+      }
+
+      // Update count
+      productCount.textContent = visibleItems.length;
+    }
+
+    // Add to Cart functionality
+    const buttons = document.querySelectorAll('.add-to-cart');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', (ev) => {
+        ev.preventDefault();
+
+        const productId = btn.dataset.id;
+        const productName = btn.dataset.name;
+        const productPrice = btn.dataset.price;
+
+        // Update cart count
+        let total = parseInt(localStorage.getItem('checkout') || '0', 10);
+        total = total + 1;
+        localStorage.setItem('checkout', total);
+
+        const checkoutSpan = document.querySelector('#checkout');
+        if (checkoutSpan) checkoutSpan.innerHTML = total;
+
+        // Visual feedback
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check me-2"></i>Added!';
+        btn.classList.remove('btn-primary');
+        btn.classList.add('btn-success');
+        btn.disabled = true;
+
+        setTimeout(() => {
+          btn.innerHTML = originalHTML;
+          btn.classList.remove('btn-success');
+          btn.classList.add('btn-primary');
+          btn.disabled = false;
+        }, 1500);
+
+        // Store cart items
+        let cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+        const existingItem = cartItems.find(item => item.id === productId);
+
+        if (existingItem) {
+          existingItem.quantity += 1;
+        } else {
+          cartItems.push({
+            id: productId,
+            name: productName,
+            price: parseFloat(productPrice),
+            quantity: 1
+          });
+        }
+
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+      });
+    });
+  });
 </script>

@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "Classic Rose Bouquet",
-        "description": "12 stunning red roses with fresh greenery, perfect for romantic occasions",
+        "description": "12 stunning pastel roses with fresh greenery, perfect for romantic occasions",
         "price": 35.99,
         "image": "images/roses.jpg",
         "category": "bouquets",
@@ -11,7 +11,7 @@
     {
         "id": 2,
         "name": "Spring Tulip Mix",
-        "description": "Colorful assortment of fresh tulips in pink, yellow and red",
+        "description": "Colorful assortment of fresh tulips in yellow",
         "price": 28.99,
         "image": "images/tulip.jpg",
         "category": "bouquets",
@@ -20,7 +20,7 @@
     {
         "id": 3,
         "name": "Elegant Orchid Plant",
-        "description": "Beautiful purple orchid in decorative ceramic pot, long-lasting beauty",
+        "description": "Beautiful pink orchid in decorative ceramic pot, long-lasting beauty",
         "price": 42.99,
         "image": "images/orchid.jpg",
         "category": "plants",
@@ -49,7 +49,7 @@
         "name": "Wedding Deluxe Package",
         "description": "Complete floral package for your special day - bridal bouquet and decorations",
         "price": 299.99,
-        "image": "images/wedding1.jpg",
+        "image": "images/wedding1.png",
         "category": "wedding",
         "featured": false
     },
@@ -74,7 +74,7 @@
     {
         "id": 9,
         "name": "Hydrangea Heaven",
-        "description": "Full, lush hydrangea blooms in gorgeous blue and purple tones",
+        "description": "Full, lush hydrangea blooms in gorgeous pink tones",
         "price": 48.99,
         "image": "images/hydrangea.jpg",
         "category": "bouquets",
@@ -83,7 +83,7 @@
     {
         "id": 10,
         "name": "Bridal Bouquet Collection",
-        "description": "Elegant white roses and calla lilies for the perfect wedding day",
+        "description": "Elegant roses, lilies and orchids for the perfect wedding day",
         "price": 150.00,
         "image": "images/bridal.jpg",
         "category": "wedding",
