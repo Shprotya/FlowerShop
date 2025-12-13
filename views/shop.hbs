@@ -90,6 +90,14 @@
     const productCount = document.getElementById('productCount');
     const noResults = document.getElementById('noResults');
 
+    // Set default category from URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlCategory = urlParams.get('category');
+    if (urlCategory) {
+      categoryFilter.value = urlCategory;
+      filterAndSort();
+    }
+
     // Filter by Category
     categoryFilter.addEventListener('change', () => {
       filterAndSort();

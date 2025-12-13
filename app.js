@@ -37,15 +37,15 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
     const state = { home: true, shop: false, about: false, contact: false, login: false, checkout: false };
     const head = {
-        title: "Petal Poetry", 
+        title: "Petal Poetry",
         description: "Explore different flowers for sale",
         keywords: "flower shop, buy flowers, floral arrangements, bouquets"
     };
-    
+
     // Load products and filter featured ones for home page
     const allProducts = JSON.parse(fs.readFileSync('./public/data/products.json', 'utf8'));
     const featuredProducts = allProducts.filter(product => product.featured === true);
-    
+
     res.render('index', { state: state, head: head, products: featuredProducts });
     console.log('home');
 });
@@ -54,14 +54,15 @@ app.get('/', (req, res) => {
 app.get('/shop', (req, res) => {
     const state = { home: false, shop: true, about: false, contact: false, login: false, checkout: false };
     const head = {
-        title: "Shop - Petal Poetry", 
+        title: "Shop - Petal Poetry",
         description: "Browse our flower collection",
         keywords: "flower shop, buy flowers, floral arrangements, bouquets"
     };
-    
+
     // Load products from JSON file
     const products = JSON.parse(fs.readFileSync('./public/data/products.json', 'utf8'));
-    
+    const selectedCategory = req.query.category || 'all'; // Get category from URL query
+
     res.render('shop', { state: state, head: head, products: products });
     console.log('shop');
 });
