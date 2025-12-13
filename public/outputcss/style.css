@@ -18,6 +18,17 @@ main {
   flex: 1;
 }
 
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.fas,
+.modal-title {
+  color: #CE5E5B;
+}
+
 form {
   margin: 10px;
 }

@@ -35,15 +35,18 @@ app.use(express.urlencoded({ extended: true }));
 
 // home page or home route
 app.get('/', (req, res) => {
-    // set active or not for navigation
     const state = { home: true, shop: false, about: false, contact: false, login: false, checkout: false };
-    // set specifics for <head>.
     const head = {
-        title: "Petal Poetry", description: "Explore different flowers for sale",
+        title: "Petal Poetry", 
+        description: "Explore different flowers for sale",
         keywords: "flower shop, buy flowers, floral arrangements, bouquets"
     };
-    res.render('index', { state: state, head: head });
-    // send this to terminal where node app is running
+    
+    // Load products and filter featured ones for home page
+    const allProducts = JSON.parse(fs.readFileSync('./public/data/products.json', 'utf8'));
+    const featuredProducts = allProducts.filter(product => product.featured === true);
+    
+    res.render('index', { state: state, head: head, products: featuredProducts });
     console.log('home');
 });
 
