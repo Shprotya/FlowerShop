@@ -5,7 +5,8 @@
         "description": "12 stunning red roses with fresh greenery, perfect for romantic occasions",
         "price": 35.99,
         "image": "images/roses.jpg",
-        "category": "bouquets"
+        "category": "bouquets",
+        "featured": true
     },
     {
         "id": 2,
@@ -13,7 +14,8 @@
         "description": "Colorful assortment of fresh tulips in pink, yellow and red",
         "price": 28.99,
         "image": "images/tulip.jpg",
-        "category": "bouquets"
+        "category": "bouquets",
+        "featured": false
     },
     {
         "id": 3,
@@ -21,7 +23,8 @@
         "description": "Beautiful purple orchid in decorative ceramic pot, long-lasting beauty",
         "price": 42.99,
         "image": "images/orchid.jpg",
-        "category": "plants"
+        "category": "plants",
+        "featured": true
     },
     {
         "id": 4,
@@ -29,7 +32,8 @@
         "description": "Bright sunflowers to light up any room with happiness and warmth",
         "price": 25.99,
         "image": "images/sunflowers.jpg",
-        "category": "bouquets"
+        "category": "bouquets",
+        "featured": false
     },
     {
         "id": 5,
@@ -37,7 +41,8 @@
         "description": "Elegant mix of roses, lilies, and carnations in soft pastel colors",
         "price": 45.99,
         "image": "images/romantic.jpg",
-        "category": "bouquets"
+        "category": "bouquets",
+        "featured": true
     },
     {
         "id": 6,
@@ -45,6 +50,115 @@
         "description": "Complete floral package for your special day - bridal bouquet and decorations",
         "price": 299.99,
         "image": "images/wedding1.jpg",
-        "category": "special"
+        "category": "wedding",
+        "featured": false
+    },
+    {
+        "id": 7,
+        "name": "Peony Paradise",
+        "description": "Luxurious pink peonies in full bloom, a symbol of romance and prosperity",
+        "price": 52.99,
+        "image": "images/peony.jpg",
+        "category": "bouquets",
+        "featured": false
+    },
+    {
+        "id": 8,
+        "name": "Lavender Dreams",
+        "description": "Soothing lavender stems, perfect for relaxation and aromatherapy",
+        "price": 32.99,
+        "image": "images/lavender.jpg",
+        "category": "bouquets",
+        "featured": false
+    },
+    {
+        "id": 9,
+        "name": "Hydrangea Heaven",
+        "description": "Full, lush hydrangea blooms in gorgeous blue and purple tones",
+        "price": 48.99,
+        "image": "images/hydrangea.jpg",
+        "category": "bouquets",
+        "featured": false
+    },
+    {
+        "id": 10,
+        "name": "Bridal Bouquet Collection",
+        "description": "Elegant white roses and calla lilies for the perfect wedding day",
+        "price": 150.00,
+        "image": "images/bridal.jpg",
+        "category": "wedding",
+        "featured": false
+    },
+    {
+        "id": 11,
+        "name": "Wedding Centerpiece Set",
+        "description": "Set of 10 elegant table centerpieces for your reception",
+        "price": 450.00,
+        "image": "images/centerpiece.jpg",
+        "category": "wedding",
+        "featured": false
+    },
+    {
+        "id": 12,
+        "name": "Ceremony Arch Decoration",
+        "description": "Beautiful floral arch arrangement for your ceremony backdrop",
+        "price": 650.00,
+        "image": "images/arch.png",
+        "category": "wedding",
+        "featured": false
+    },
+    {
+        "id": 13,
+        "name": "Succulent Garden",
+        "description": "Low-maintenance succulent arrangement in a decorative pot",
+        "price": 29.99,
+        "image": "images/succulent.jpg",
+        "category": "plants",
+        "featured": false
+    },
+    {
+        "id": 14,
+        "name": "Peace Lily Plant",
+        "description": "Air-purifying peace lily in elegant white ceramic pot",
+        "price": 38.99,
+        "image": "images/peacelily.png",
+        "category": "plants",
+        "featured": false
+    },
+    {
+        "id": 15,
+        "name": "Bonsai Tree",
+        "description": "Traditional Japanese bonsai tree, a living work of art",
+        "price": 85.99,
+        "image": "images/bonsai.jpg",
+        "category": "plants",
+        "featured": false
+    },
+    {
+        "id": 16,
+        "name": "Chocolate & Flowers Gift",
+        "description": "Premium Belgian chocolates paired with a stunning rose bouquet",
+        "price": 55.99,
+        "image": "images/chocolate.jpg",
+        "category": "gifts",
+        "featured": false
+    },
+    {
+        "id": 17,
+        "name": "Spa Gift Basket",
+        "description": "Relaxation basket with flowers, candles, and bath essentials",
+        "price": 75.99,
+        "image": "images/spa.png",
+        "category": "gifts",
+        "featured": false
+    },
+    {
+        "id": 18,
+        "name": "Birthday Celebration Box",
+        "description": "Festive flowers with birthday card and small gift included",
+        "price": 65.99,
+        "image": "images/birthday.png",
+        "category": "gifts",
+        "featured": false
     }
 ]
