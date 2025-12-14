@@ -119,7 +119,6 @@
         return userDetails;
     }
 
-    // 1. LOAD DATA ON PAGE LOAD
     const userDetails = getUserDetails();
 
     // Now, load the values into the form fields
@@ -133,10 +132,10 @@
     document.getElementById("address3ID").value = userDetails.address3 || "";
 
 
-    // 2. SAVE DATA ON FORM SUBMISSION
+    // save data on form submit
     document.getElementById('udetails').addEventListener('submit', (event) => {
         event.preventDefault();
-    
+
         // Basic form validation check (Bootstrap style)
         const form = document.getElementById('udetails');
         if (!form.checkValidity()) {
@@ -159,9 +158,11 @@
         // Save the updated object to localstorage
         localStorage.setItem('userdetails', JSON.stringify(userDetails));
 
-        alert("Your details have been successfully updated!");
+        const modal = document.getElementById('updatedDetailsModal');
+        if (modal && typeof bootstrap !== 'undefined') {
+            new bootstrap.Modal(modal).show();
+        }
 
-        // Optional: Reset validation state after successful submission
         form.classList.remove('was-validated');
     });
 </script>

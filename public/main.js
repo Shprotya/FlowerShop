@@ -1,4 +1,3 @@
-// custom.js 
 // some basic functionality for login, checkout, userdetails
 // amend and supplement in your project as you see fit
 

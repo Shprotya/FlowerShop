@@ -9,6 +9,28 @@
     {{> _header}}
     {{{body}}}
     {{> _footer}}
+    <div class="modal fade" id="updatedDetailsModal" tabindex="-1" aria-labelledby="updatedDetailsModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header" style="background-color: #fef7f0; border-bottom: 2px solid #CE5E5B;">
+                    <h5 class="modal-title" id="updatedDetailsModalLabel">Details Updated</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body text-center">
+                    <i class="fas fa-check-circle fa-3x mb-3"></i>
+                    <p>You have successfully updated your account details.</p>
+                </div>
+
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="logoutSuccessModal" tabindex="-1" aria-labelledby="logoutSuccessModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered">
