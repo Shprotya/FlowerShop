@@ -40,7 +40,7 @@ function checkLoginStatus() {
     var userdetailsEl = document.getElementById('userdetails');
     var loginEl = document.querySelector('#loginlogout');
 
-    // NEW: Check for Logout Success Flag and show modal
+    //Check for Logout Success Flag and show modal
     var logoutSuccess = localStorage.getItem('logoutSuccess');
     if (logoutSuccess == '1') {
         const modalElement = document.getElementById('logoutSuccessModal');
@@ -51,7 +51,7 @@ function checkLoginStatus() {
             logoutModal.show();
         }
 
-        // IMPORTANT: Always remove the flag regardless of whether the modal showed
+        // Always remove the flag regardless of whether the modal showed
         localStorage.removeItem('logoutSuccess');
     }
 

@@ -252,7 +252,7 @@
 </div>
 
 <script>
-    //function to load user details from local storage and auto-fill the contact form
+    //load user details from local storage and auto-fill the contact form
     function loadUserDetails() {
         //check login status
         const isLoggedIn = localStorage.getItem('loggedIn') === '1';
@@ -262,31 +262,31 @@
             console.log("User is not logged in. Contact form will not be autofilled.");
             return;
         }
-        
+
         //If logged in, proceed to load data
         const userDetailsString = localStorage.getItem('userdetails');
         if (userDetailsString) {
             try {
                 const userDetails = JSON.parse(userDetailsString);
-                
+
                 // Auto-fill First Name
                 const firstNameField = document.getElementById('firstName');
                 if (firstNameField && userDetails.firstName) {
                     firstNameField.value = userDetails.firstName;
                 }
-                
+
                 // Auto-fill Last Name
                 const lastNameField = document.getElementById('lastName');
                 if (lastNameField && userDetails.lastName) {
                     lastNameField.value = userDetails.lastName;
                 }
-                
+
                 // Auto-fill Email Address
                 const emailField = document.getElementById('email');
                 if (emailField && userDetails.email) {
                     emailField.value = userDetails.email;
                 }
-                
+
                 // Auto-fill Phone Number
                 const phoneField = document.getElementById('phone');
                 if (phoneField && userDetails.phone) {
@@ -298,7 +298,7 @@
             }
         }
     }
-    
+
     // Call the function when the page loads
     loadUserDetails();
 
