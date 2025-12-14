@@ -1,104 +1,357 @@
-<h1>Checkout</h1>
-<div>
-    <div>
-        <form name="checkout" id="user-checkout" action="" method="get">
-            <fieldset>
-                <legend>Delivery Details</legend>
+<div class="container my-5">
+    <h1 class="mb-4 text-center">Complete Your Purchase</h1>
 
-                <label for="getFirstName">First name</label>
-                <input type="text" id="getFirstName" name="firstname" value="firstname" required>
+    <div class="row g-5">
 
-                <label for="getLastName">Last name</label>
-                <input type="text" c id="getLastName" name="lastname" value="surname" required>
+        <div class="col-lg-7">
 
-                <label for="getAddress1">Addresss</label>
-                <input type="text" id="getAddress1" name="address2" value="address 1" required>
+            <h2 class="h4 mb-3">Delivery Details</h2>
+            <form name="checkout" id="user-checkout" action="" method="get">
 
-                <label for="getAddress2">Addresss</label>
-                <input type="text" id="getAddress2" name="address2" value="address 2" required>
+                <fieldset class="mb-5 p-4 border rounded shadow-sm">
+                    <legend class="h5 fw-bold text-primary mb-3">Shipping Information</legend>
 
-                <label for="getAddress3">Addresss</label>
-                <input type="text" id="getAddress3" name="address3" value="address 3" required>
-            </fieldset>
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" id="sameAddressCheck">
+                        <label class="form-check-label fw-bold" for="sameAddressCheck">
+                            <i class="fas fa-user-check me-2 text-success"></i>My delivery address is the same as my
+                            saved User Details address.
+                        </label>
+                    </div>
 
-            <fieldset>
-                <legend>Payment Details</legend>
+                    <div id="delivery-details-fields" class="row g-3">
+                        <div class="col-md-6">
+                            <label for="getFirstName" class="form-label">First name</label>
+                            <input type="text" class="form-control" id="getFirstName" name="firstname" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="getLastName" class="form-label">Last name</label>
+                            <input type="text" class="form-control" id="getLastName" name="lastname" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="getAddress1" class="form-label">Address line 1</label>
+                            <input type="text" class="form-control" id="getAddress1" name="address1" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="getAddress2" class="form-label">Address line 2 (Optional)</label>
+                            <input type="text" class="form-control" id="getAddress2" name="address2">
+                        </div>
+                        <div class="col-12">
+                            <label for="getAddress3" class="form-label">Town/City</label>
+                            <input type="text" class="form-control" id="getAddress3" name="address3" required>
+                        </div>
+                    </div>
+                </fieldset>
 
-                <label for="getCardName">Card Name</label>
-                <input type="text" id="cardName" name="cardname" value="MR FIRSTNAME SURNAME" required>
+                <h2 class="h4 mb-3 mt-5">Payment Details</h2>
+                <fieldset class="p-4 border rounded shadow-sm">
+                    <legend class="h5 fw-bold text-primary mb-3">Card Information</legend>
 
-                <label for="getCardNumber">Card Number</label>
-                <input type="text" id="cardNumber" name="cardNumber" value="1234 5678 9102 3456" required>
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label for="cardName" class="form-label">Name on Card</label>
+                            <input type="text" class="form-control" id="cardName" name="cardname"
+                                value="MR FIRSTNAME SURNAME" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="cardNumber" class="form-label">Card Number</label>
+                            <input type="text" class="form-control" id="cardNumber" name="cardNumber"
+                                value="1234 5678 9102 3456" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="cardExpiry" class="form-label">Expiry Date (MM/YY)</label>
+                            <input type="text" class="form-control" id="cardExpiry" name="cardExpiry" value="09/27"
+                                required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="cardCvv" class="form-label">CVV</label>
+                            <input type="text" class="form-control" id="cardCvv" name="cardcvv" required>
+                        </div>
+                    </div>
+                </fieldset>
 
-                <label for="getCardCVC">CVC</label>
-                <input type="password" id="cardCvv" name="cardCvv" required>
-            </fieldset>
+                <button type="submit" id="checkout-button" class="btn btn-primary w-100 mt-5">
+                    <i class="fas fa-shopping-cart me-2"></i>Pay Now
+                </button>
 
-            <div id="payment-success" role="alert">
-                Thank you for your purchase. You will receive delivery details via email. Please return to our <a
-                    href="/shop">Shopping Page</a>.
+                <div role="alert" id="payment-success" class="alert alert-success mt-3" style="display:none;">
+                    <i class="fas fa-check-circle me-2"></i>
+                    Payment successful! Your order has been placed.
+                </div>
+
+                <div role="alert" id="payment-failure" class="alert alert-danger mt-3" style="display:none;">
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    Payment failed. Please check your card details and try again.
+                </div>
+            </form>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="card shadow-lg checkout-summary">
+
+                <div class="card-header text-white">
+                    <h3 class="h5 mb-0"><i class="fas fa-receipt me-2"></i>Order Summary</h3>
+                </div>
+
+                <div class="card-body">
+
+                    <ul class="list-group list-group-flush mb-4" id="cart-items-list">
+                        <li class="list-group-item text-center py-5" id="empty-cart-message">
+                            Your cart is empty. <a href="/shop">Go shopping!</a>
+                        </li>
+                    </ul>
+
+                    <div class="border-top pt-3">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Subtotal:</span>
+                            <span id="subtotal" class="fw-bold">€0.00</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Shipping (Standard):</span>
+                            <span id="shipping-cost" class="fw-bold">€5.00</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between fw-bold fs-5 border-top pt-2">
+                            <span>Order Total:</span>
+                            <span id="order-total">€5.00</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer text-center">
+                    <a href="/shop" class="btn btn-sm btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-1"></i> Continue Shopping
+                    </a>
+                </div>
             </div>
-            <div id="payment-failure" role="alert">
-                There seems to be a problem with the card details you entered.
-            </div>
-            <div>
-                <input type='submit' class="btn btn-primary" id="buy-now" name="buy-now" value="Buy Now">
-            </div>
-        </form>
+        </div>
     </div>
+</div>
 </div>
 
 <script>
-    // checkout.js
+    document.addEventListener('DOMContentLoaded', () => {
+        const checkoutForm = document.getElementById('user-checkout');
+        const checkoutButton = document.getElementById('checkout-button');
+        const sameAddressCheck = document.getElementById('sameAddressCheck');
+        const fieldsContainer = document.getElementById('delivery-details-fields');
+        const firstNameInput = document.getElementById('getFirstName');
+        const lastNameInput = document.getElementById('getLastName');
+        const address1Input = document.getElementById('getAddress1');
+        const address2Input = document.getElementById('getAddress2');
+        const address3Input = document.getElementById('getAddress3');
 
-    var checkout = document.getElementById('buy-now');
-    // add a listener for add to cart if such a button id is pressed
-    var element = document.getElementById("payment-failure");
-    element.style.display = 'none';
-    var element = document.getElementById("payment-success");
-    element.style.display = 'none';
+        // --- PART 1: AUTOFILL LOGIC (from previous step) ---
 
-    var loggedin = localStorage.getItem('loggedIn');
-    if (loggedin == '0' || loggedin == 0 || !loggedin) {
-        // redirect to login route
-        window.location.href = '/login';
-    }
-    // add a listener so that we run this code and preventdefault for submit...
-    checkout.addEventListener("click", (event) => {
-        event.preventDefault();
-        var cardnumber = document.getElementById('cardNumber').value;
-        var cardcvv = document.getElementById('cardCvv').value;
+        // Function to get user details from localStorage
+        function getUserDetails() {
+            const userDetailsJSON = localStorage.getItem('userdetails');
+            try {
+                return userDetailsJSON ? JSON.parse(userDetailsJSON) : null;
+            } catch (e) {
+                console.error("Error parsing user details from local storage:", e);
+                return null;
+            }
+        }
 
-        if (cardnumber == "1234 5678 9102 3456" && cardcvv == "123") {
-            alert("payment success");
-            var element = document.getElementById("payment-failure");
-            element.style.display = 'none';
-            //element.classList.add("d-none"); // bootstrap hide
-            var element = document.getElementById("payment-success");
-            element.style.display = 'block';
-            //element.classList.remove("d-none"); // bootstrap hide
-            // now set cart total to zero
-            var total = 0;
-            // makes sure that when we goto another page the total is zero 
-            localStorage.setItem('checkout', total);
+        // Function to handle the autofill/manual toggle
+        function toggleAddressFields(isDisabled, userDetails) {
+            const inputs = fieldsContainer.querySelectorAll('input[type="text"]');
 
-        } else {
-            alert("payment failure");
-            var element = document.getElementById("payment-failure");
-            if (element) element.style.display = 'block';
-            var element = document.getElementById("payment-success");
-            if (element) element.style.display = 'none';
-            //element.classList.add("d-none");
-            var element = document.getElementById("payment-failure");
-            //element.classList.remove("d-none");
+            if (isDisabled && userDetails) {
+                // AUTOFILL and DISABLE
+                firstNameInput.value = userDetails.firstName || '';
+                lastNameInput.value = userDetails.lastName || '';
+                address1Input.value = userDetails.address1 || '';
+                address2Input.value = userDetails.address2 || '';
+                address3Input.value = userDetails.address3 || '';
 
+                inputs.forEach(input => {
+                    input.setAttribute('disabled', 'disabled');
+                    input.classList.add('bg-light'); // Visual cue for disabled
+                });
+            } else {
+                // CLEAR and ENABLE (manual entry)
+                firstNameInput.value = '';
+                lastNameInput.value = '';
+                address1Input.value = '';
+                address2Input.value = '';
+                address3Input.value = '';
+
+                inputs.forEach(input => {
+                    input.removeAttribute('disabled');
+                    input.classList.remove('bg-light'); // Remove visual cue
+                });
+            }
+        }
+
+        // Add event listener to the checkbox
+        sameAddressCheck.addEventListener('change', (event) => {
+            const userDetails = getUserDetails();
+            const isChecked = event.target.checked;
+
+            if (isChecked) {
+                if (userDetails) {
+                    toggleAddressFields(true, userDetails);
+                } else {
+                    alert("No saved user details found. Please save your details on the User Details page first.");
+                    event.target.checked = false;
+                    toggleAddressFields(false);
+                }
+            } else {
+                toggleAddressFields(false);
+            }
+        });
+
+        // Initial setup: ensure fields are enabled for manual entry on load
+        toggleAddressFields(false);
+
+
+        // --- PART 2: CART DISPLAY AND REMOVAL LOGIC (NEW) ---
+
+        const cartItemsList = document.getElementById('cart-items-list');
+        const emptyMessage = document.getElementById('empty-cart-message');
+        const subtotalEl = document.getElementById('subtotal');
+        const shippingCostEl = document.getElementById('shipping-cost');
+        const orderTotalEl = document.getElementById('order-total');
+        const shippingCost = 5.00; // Fixed shipping cost
+
+        shippingCostEl.textContent = '€' + shippingCost.toFixed(2);
+
+
+        function getCartItems() {
+            const cartItemsJSON = localStorage.getItem('cartItems');
+            try {
+                return cartItemsJSON ? JSON.parse(cartItemsJSON) : [];
+            } catch (e) {
+                console.error("Error parsing cart items from local storage:", e);
+                return [];
+            }
+        }
+
+        function saveCartItems(cartItems) {
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+
+            // Also update the header cart count (using 'checkout' key)
+            const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+            localStorage.setItem('checkout', totalQuantity);
+            const checkoutSpan = document.querySelector('#checkout');
+            if (checkoutSpan) checkoutSpan.innerHTML = totalQuantity;
         }
 
 
+        function renderCartSummary() {
+            const cartItems = getCartItems();
+            cartItemsList.innerHTML = ''; // Clear existing items
+
+            let subtotal = 0;
+
+            if (cartItems.length === 0) {
+                emptyMessage.style.display = 'list-item';
+                checkoutButton.setAttribute('disabled', 'disabled'); // Disable payment if cart is empty
+            } else {
+                emptyMessage.style.display = 'none';
+                checkoutButton.removeAttribute('disabled');
+
+                cartItems.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    subtotal += itemTotal;
+
+                    const listItem = document.createElement('li');
+                    listItem.className = 'list-group-item d-flex justify-content-between align-items-center cart-item-detail';
+                    listItem.setAttribute('data-id', item.id);
+
+                    listItem.innerHTML = `
+                        <div>
+                            <h6 class="my-0">${item.name}</h6>
+                            <small class="text-muted">Qty: ${item.quantity} x €${item.price.toFixed(2)}</small>
+                            <span class="text-muted d-block fst-italic">Total: €${itemTotal.toFixed(2)}</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <button type="button" class="btn btn-sm btn-outline-danger remove-item-btn" data-id="${item.id}">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    `;
+                    cartItemsList.appendChild(listItem);
+                });
+            }
+
+            // Update Totals
+            subtotalEl.textContent = '€' + subtotal.toFixed(2);
+            let total = subtotal;
+
+            // Only add shipping if there are items in the cart
+            if (subtotal > 0) {
+                total += shippingCost;
+                shippingCostEl.parentNode.style.display = 'flex';
+                // If the cart is empty, we keep the shipping cost visible but the total will reflect only the shipping if we did not check if the total is 0
+            } else {
+                shippingCostEl.parentNode.style.display = 'none';
+                total = 0; // Set total to 0 if cart is empty
+            }
+
+            orderTotalEl.textContent = '€' + total.toFixed(2);
+        }
+
+        // Handle "Remove" button clicks
+        cartItemsList.addEventListener('click', (event) => {
+            const removeButton = event.target.closest('.remove-item-btn');
+            if (removeButton) {
+                const itemIdToRemove = removeButton.dataset.id;
+                let cartItems = getCartItems();
+
+                // Remove the item completely from the cart array
+                cartItems = cartItems.filter(item => item.id != itemIdToRemove);
+
+                // Save and re-render
+                saveCartItems(cartItems);
+                renderCartSummary();
+            }
+        });
+
+        // Initial call to render the cart on page load
+        renderCartSummary();
 
 
-    })
+        // --- PART 3: PAYMENT LOGIC (Updated to use checkout-button ID) ---
 
+        // Add an event listener so that we run this code and preventdefault for submit...
+        checkoutButton.addEventListener("click", (event) => {
+            event.preventDefault();
 
+            // Check if cart is empty before processing payment
+            if (getCartItems().length === 0) {
+                alert("Your cart is empty. Please add items to proceed with payment.");
+                return;
+            }
 
+            var cardnumber = document.getElementById('cardNumber').value;
+            var cardcvv = document.getElementById('cardCvv').value;
+
+            if (cardnumber == "1234 5678 9102 3456" && cardcvv == "123") {
+                // Success
+                var elementF = document.getElementById("payment-failure");
+                elementF.style.display = 'none';
+                var elementS = document.getElementById("payment-success");
+                elementS.style.display = 'block';
+
+                // Clear the cart on successful payment
+                localStorage.setItem('checkout', 0);
+                localStorage.setItem('cartItems', '[]');
+
+                // Update the UI
+                const checkoutSpan = document.querySelector('#checkout');
+                if (checkoutSpan) checkoutSpan.innerHTML = 0;
+                renderCartSummary(); // Re-render to show empty cart
+
+            } else {
+                // Failure
+                var elementF = document.getElementById("payment-failure");
+                if (elementF) elementF.style.display = 'block';
+                var elementS = document.getElementById("payment-success");
+                if (elementS) elementS.style.display = 'none';
+            }
+        });
+    });
 </script>

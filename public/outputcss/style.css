@@ -1,7 +1,7 @@
-.product-card, .hover-effect {
+.btn-primary, .product-card, .hover-effect {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.product-card:hover, .hover-effect:hover {
+.btn-primary:hover, .product-card:hover, .hover-effect:hover {
   transform: translateY(-5px);
 }
 
@@ -86,15 +86,6 @@ form {
   height: 250px;
   -o-object-fit: cover;
      object-fit: cover;
-}
-
-.btn-primary {
-  background-color: #CE5E5B;
-  border-color: #CE5E5B;
-}
-.btn-primary:hover {
-  background-color: rgb(189.4084507042, 60.0563380282, 56.5915492958);
-  border-color: rgb(189.4084507042, 60.0563380282, 56.5915492958);
 }
 
 #heroCarousel .carousel-item img {
@@ -199,4 +190,65 @@ form {
 }
 .contact-page .social-btn i {
   font-size: 1.1rem;
+}
+
+#user-checkout .form-control:focus {
+  border-color: #DD8E8C;
+  box-shadow: 0 0 0 0.25rem rgba(221, 142, 140, 0.25);
+}
+#user-checkout fieldset legend {
+  color: #CE5E5B;
+  font-size: 1.1rem;
+  border-bottom: 1px solid white;
+  padding-bottom: 0.5rem;
+}
+#user-checkout .form-check-label {
+  color: #495057;
+  transition: color 0.3s ease;
+}
+#user-checkout .form-check-label:hover {
+  color: #CE5E5B;
+}
+
+.checkout-summary {
+  position: sticky;
+  top: 20px;
+  border-radius: 10px;
+  border: none;
+  overflow: hidden;
+}
+.checkout-summary .card-header {
+  background-color: #CE5E5B;
+  color: white;
+  padding: 1rem 1.5rem;
+  border-bottom: none;
+}
+.checkout-summary .list-group-item:last-child {
+  border-bottom: none;
+}
+.checkout-summary .cart-item-detail {
+  padding: 0.75rem 0;
+}
+.checkout-summary .cart-item-detail .btn-outline-danger {
+  color: #CE5E5B;
+  border-color: #CE5E5B;
+}
+.checkout-summary .cart-item-detail .btn-outline-danger:hover {
+  background-color: #CE5E5B;
+  color: white;
+}
+.checkout-summary .cart-item-detail h6 {
+  color: #343a40;
+}
+.checkout-summary #order-total {
+  color: #CE5E5B;
+}
+
+.btn-primary {
+  background-color: #CE5E5B;
+  border-color: #CE5E5B;
+}
+.btn-primary:hover {
+  background-color: rgb(189.4084507042, 60.0563380282, 56.5915492958);
+  border-color: rgb(189.4084507042, 60.0563380282, 56.5915492958);
 }

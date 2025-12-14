@@ -122,16 +122,6 @@ form {
     }
 }
 
-.btn-primary {
-    background-color: $dusty-rose;
-    border-color: $dusty-rose;
-
-    &:hover {
-        background-color: darken($dusty-rose, 10%);
-        border-color: darken($dusty-rose, 10%);
-    }
-}
-
 // page specific styles
 
 #heroCarousel {
@@ -252,5 +242,94 @@ form {
         i {
             font-size: 1.1rem;
         }
+    }
+}
+
+// ... (rest of your existing styles)
+
+// --- Checkout Page Styles ---
+#user-checkout {
+    .form-control:focus {
+        border-color: $blush-pink;
+        box-shadow: 0 0 0 0.25rem rgba($blush-pink, 0.25);
+    }
+
+    // Custom style for the fieldset legend (REMOVED !important)
+    // #user-checkout provides enough specificity.
+    fieldset legend {
+        color: $dusty-rose;
+        font-size: 1.1rem;
+        border-bottom: 1px solid lighten($soft-peach, 5%);
+        padding-bottom: 0.5rem;
+    }
+
+    // Style for the autofill checkbox label
+    .form-check-label {
+        color: #495057;
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: $dusty-rose;
+        }
+    }
+}
+
+
+// Right Column: Cart Summary Card
+.checkout-summary {
+    position: sticky; // Make it stick for a better experience on long forms
+    top: 20px;
+    border-radius: 10px;
+    border: none;
+    overflow: hidden;
+
+    // Card Header (REMOVED !important)
+    // Relying on .checkout-summary .card-header being more specific than the global .card-header
+    .card-header {
+        background-color: $dusty-rose;
+        color: white;
+        padding: 1rem 1.5rem;
+        border-bottom: none;
+    }
+
+    .list-group-item:last-child {
+        border-bottom: none;
+    }
+
+    // Styling for individual items in the cart
+    .cart-item-detail {
+        padding: 0.75rem 0;
+
+        .btn-outline-danger {
+            color: $dusty-rose;
+            border-color: $dusty-rose;
+
+            &:hover {
+                background-color: $dusty-rose;
+                color: white;
+            }
+        }
+
+        h6 {
+            color: #343a40;
+        }
+    }
+
+    // Order Total styling (REMOVED !important)
+    // The ID selector is the most powerful.
+    #order-total {
+        color: $dusty-rose;
+    }
+}
+
+// Adjusting the primary button color to match the theme (REMOVED !important)
+.btn-primary {
+    background-color: $dusty-rose;
+    border-color: $dusty-rose;
+    @extend %smooth-rise;
+
+    &:hover {
+        background-color: darken($dusty-rose, 10%);
+        border-color: darken($dusty-rose, 10%);
     }
 }
