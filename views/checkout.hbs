@@ -95,11 +95,13 @@
 
                 <div class="card-body">
 
-                    <ul class="list-group list-group-flush mb-4" id="cart-items-list">
-                        <li class="list-group-item text-center py-5" id="empty-cart-message">
-                            Your cart is empty. <a href="/shop">Go shopping!</a>
-                        </li>
-                    </ul>
+                    <ul class="list-group list-group-flush mb-4" id="cart-items-list"></ul>
+
+                    <div id="empty-cart-message" class="text-center py-5" style="display:none;">
+                        <p class="fw-semibold mb-3">Your cart is empty 🛒</p>
+                        <a href="/shop" class="btn btn-outline-primary btn-sm">Go shopping</a>
+                    </div>
+
 
                     <div class="border-top pt-3">
                         <div class="d-flex justify-content-between mb-2">
@@ -131,247 +133,128 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+
+        /* login guard */
         const loggedIn = localStorage.getItem('loggedIn');
+        const checkoutForm = document.getElementById('user-checkout');
 
         if (loggedIn !== '1') {
-            const modalElement = document.getElementById('loginRequiredModal');
-
-            if (modalElement && typeof bootstrap !== 'undefined') {
-                const loginModal = new bootstrap.Modal(modalElement);
-                loginModal.show();
+            const modal = document.getElementById('loginRequiredModal');
+            if (modal && typeof bootstrap !== 'undefined') {
+                new bootstrap.Modal(modal).show();
             }
 
-            // Disable the checkout form completely
-            const checkoutForm = document.getElementById('user-checkout');
             if (checkoutForm) {
                 checkoutForm.querySelectorAll('input, button').forEach(el => {
                     el.disabled = true;
                 });
             }
-
-            return; // stop running checkout logic
         }
-        const checkoutForm = document.getElementById('user-checkout');
+
         const checkoutButton = document.getElementById('checkout-button');
-        const sameAddressCheck = document.getElementById('sameAddressCheck');
-        const fieldsContainer = document.getElementById('delivery-details-fields');
-        const firstNameInput = document.getElementById('getFirstName');
-        const lastNameInput = document.getElementById('getLastName');
-        const address1Input = document.getElementById('getAddress1');
-        const address2Input = document.getElementById('getAddress2');
-        const address3Input = document.getElementById('getAddress3');
-
-        // --- PART 1: AUTOFILL LOGIC (from previous step) ---
-
-        // Function to get user details from localStorage
-        function getUserDetails() {
-            const userDetailsJSON = localStorage.getItem('userdetails');
-            try {
-                return userDetailsJSON ? JSON.parse(userDetailsJSON) : null;
-            } catch (e) {
-                console.error("Error parsing user details from local storage:", e);
-                return null;
-            }
-        }
-
-        // Function to handle the autofill/manual toggle
-        function toggleAddressFields(isDisabled, userDetails) {
-            const inputs = fieldsContainer.querySelectorAll('input[type="text"]');
-
-            if (isDisabled && userDetails) {
-                // AUTOFILL and DISABLE
-                firstNameInput.value = userDetails.firstName || '';
-                lastNameInput.value = userDetails.lastName || '';
-                address1Input.value = userDetails.address1 || '';
-                address2Input.value = userDetails.address2 || '';
-                address3Input.value = userDetails.address3 || '';
-
-                inputs.forEach(input => {
-                    input.setAttribute('disabled', 'disabled');
-                    input.classList.add('bg-light'); // Visual cue for disabled
-                });
-            } else {
-                // CLEAR and ENABLE (manual entry)
-                firstNameInput.value = '';
-                lastNameInput.value = '';
-                address1Input.value = '';
-                address2Input.value = '';
-                address3Input.value = '';
-
-                inputs.forEach(input => {
-                    input.removeAttribute('disabled');
-                    input.classList.remove('bg-light'); // Remove visual cue
-                });
-            }
-        }
-
-        // Add event listener to the checkbox
-        sameAddressCheck.addEventListener('change', (event) => {
-            const userDetails = getUserDetails();
-            const isChecked = event.target.checked;
-
-            if (isChecked) {
-                if (userDetails) {
-                    toggleAddressFields(true, userDetails);
-                } else {
-                    alert("No saved user details found. Please save your details on the User Details page first.");
-                    event.target.checked = false;
-                    toggleAddressFields(false);
-                }
-            } else {
-                toggleAddressFields(false);
-            }
-        });
-
-        // Initial setup: ensure fields are enabled for manual entry on load
-        toggleAddressFields(false);
-
-
-        // --- PART 2: CART DISPLAY AND REMOVAL LOGIC (NEW) ---
-
         const cartItemsList = document.getElementById('cart-items-list');
         const emptyMessage = document.getElementById('empty-cart-message');
         const subtotalEl = document.getElementById('subtotal');
         const shippingCostEl = document.getElementById('shipping-cost');
         const orderTotalEl = document.getElementById('order-total');
-        const shippingCost = 5.00; // Fixed shipping cost
+        const shippingCost = 5.00;
 
-        shippingCostEl.textContent = '€' + shippingCost.toFixed(2);
-
-
+        /* cart helpers */
         function getCartItems() {
-            const cartItemsJSON = localStorage.getItem('cartItems');
             try {
-                return cartItemsJSON ? JSON.parse(cartItemsJSON) : [];
-            } catch (e) {
-                console.error("Error parsing cart items from local storage:", e);
+                return JSON.parse(localStorage.getItem('cartItems')) || [];
+            } catch {
                 return [];
             }
         }
 
         function saveCartItems(cartItems) {
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            const totalQty = cartItems.reduce((sum, i) => sum + i.quantity, 0);
+            localStorage.setItem('checkout', totalQty);
 
-            // Also update the header cart count (using 'checkout' key)
-            const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-            localStorage.setItem('checkout', totalQuantity);
             const checkoutSpan = document.querySelector('#checkout');
-            if (checkoutSpan) checkoutSpan.innerHTML = totalQuantity;
+            if (checkoutSpan) checkoutSpan.textContent = totalQty;
         }
 
-
+        /* render cart  */
         function renderCartSummary() {
             const cartItems = getCartItems();
-            cartItemsList.innerHTML = ''; // Clear existing items
+            cartItemsList.innerHTML = '';
+
+            if (cartItems.length === 0) {
+                emptyMessage.style.display = 'block';
+                checkoutButton.disabled = true;
+                subtotalEl.textContent = '€0.00';
+                shippingCostEl.parentNode.style.display = 'none';
+                orderTotalEl.textContent = '€0.00';
+                return;
+            }
+
+            emptyMessage.style.display = 'none';
+            checkoutButton.disabled = false;
 
             let subtotal = 0;
 
-            if (cartItems.length === 0) {
-                emptyMessage.style.display = 'list-item';
-                checkoutButton.setAttribute('disabled', 'disabled'); // Disable payment if cart is empty
-            } else {
-                emptyMessage.style.display = 'none';
-                checkoutButton.removeAttribute('disabled');
+            cartItems.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
 
-                cartItems.forEach(item => {
-                    const itemTotal = item.price * item.quantity;
-                    subtotal += itemTotal;
+                const li = document.createElement('li');
+                li.className = 'list-group-item d-flex justify-content-between align-items-center';
+                li.innerHTML = `
+                <div>
+                    <strong>${item.name}</strong><br>
+                    <small>Qty: ${item.quantity} × €${item.price.toFixed(2)}</small>
+                </div>
+                <button class="btn btn-sm btn-outline-danger remove-item-btn" data-id="${item.id}">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+                cartItemsList.appendChild(li);
+            });
 
-                    const listItem = document.createElement('li');
-                    listItem.className = 'list-group-item d-flex justify-content-between align-items-center cart-item-detail';
-                    listItem.setAttribute('data-id', item.id);
-
-                    listItem.innerHTML = `
-                        <div>
-                            <h6 class="my-0">${item.name}</h6>
-                            <small class="text-muted">Qty: ${item.quantity} x €${item.price.toFixed(2)}</small>
-                            <span class="text-muted d-block fst-italic">Total: €${itemTotal.toFixed(2)}</span>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <button type="button" class="btn btn-sm btn-outline-danger remove-item-btn" data-id="${item.id}">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </div>
-                    `;
-                    cartItemsList.appendChild(listItem);
-                });
-            }
-
-            // Update Totals
             subtotalEl.textContent = '€' + subtotal.toFixed(2);
-            let total = subtotal;
-
-            // Only add shipping if there are items in the cart
-            if (subtotal > 0) {
-                total += shippingCost;
-                shippingCostEl.parentNode.style.display = 'flex';
-                // If the cart is empty, we keep the shipping cost visible but the total will reflect only the shipping if we did not check if the total is 0
-            } else {
-                shippingCostEl.parentNode.style.display = 'none';
-                total = 0; // Set total to 0 if cart is empty
-            }
-
-            orderTotalEl.textContent = '€' + total.toFixed(2);
+            shippingCostEl.parentNode.style.display = 'flex';
+            orderTotalEl.textContent = '€' + (subtotal + shippingCost).toFixed(2);
         }
 
-        // Handle "Remove" button clicks
-        cartItemsList.addEventListener('click', (event) => {
-            const removeButton = event.target.closest('.remove-item-btn');
-            if (removeButton) {
-                const itemIdToRemove = removeButton.dataset.id;
-                let cartItems = getCartItems();
+        /* remove item */
+        cartItemsList.addEventListener('click', (e) => {
+            const btn = e.target.closest('.remove-item-btn');
+            if (!btn) return;
 
-                // Remove the item completely from the cart array
-                cartItems = cartItems.filter(item => item.id != itemIdToRemove);
+            const id = btn.dataset.id;
+            let cartItems = getCartItems().filter(item => item.id != id);
+            saveCartItems(cartItems);
+            renderCartSummary();
+        });
 
-                // Save and re-render
-                saveCartItems(cartItems);
+        /* payments */
+        checkoutButton.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            if (getCartItems().length === 0) return;
+
+            const cardNumber = document.getElementById('cardNumber').value;
+            const cardCvv = document.getElementById('cardCvv').value;
+
+            const success = cardNumber === '1234 5678 9102 3456' && cardCvv === '123';
+
+            document.getElementById('payment-success').style.display = success ? 'block' : 'none';
+            document.getElementById('payment-failure').style.display = success ? 'none' : 'block';
+
+            if (success) {
+                localStorage.setItem('cartItems', '[]');
+                localStorage.setItem('checkout', 0);
+
+                const checkoutSpan = document.querySelector('#checkout');
+                if (checkoutSpan) checkoutSpan.textContent = 0;
+
                 renderCartSummary();
             }
         });
 
-        // Initial call to render the cart on page load
         renderCartSummary();
-
-
-        // --- PART 3: PAYMENT LOGIC (Updated to use checkout-button ID) ---
-
-        // Add an event listener so that we run this code and preventdefault for submit...
-        checkoutButton.addEventListener("click", (event) => {
-            event.preventDefault();
-
-            // Check if cart is empty before processing payment
-            if (getCartItems().length === 0) {
-                alert("Your cart is empty. Please add items to proceed with payment.");
-                return;
-            }
-
-            var cardnumber = document.getElementById('cardNumber').value;
-            var cardcvv = document.getElementById('cardCvv').value;
-
-            if (cardnumber == "1234 5678 9102 3456" && cardcvv == "123") {
-                // Success
-                var elementF = document.getElementById("payment-failure");
-                elementF.style.display = 'none';
-                var elementS = document.getElementById("payment-success");
-                elementS.style.display = 'block';
-
-                // Clear the cart on successful payment
-                localStorage.setItem('checkout', 0);
-                localStorage.setItem('cartItems', '[]');
-
-                // Update the UI
-                const checkoutSpan = document.querySelector('#checkout');
-                if (checkoutSpan) checkoutSpan.innerHTML = 0;
-                renderCartSummary(); // Re-render to show empty cart
-
-            } else {
-                // Failure
-                var elementF = document.getElementById("payment-failure");
-                if (elementF) elementF.style.display = 'block';
-                var elementS = document.getElementById("payment-success");
-                if (elementS) elementS.style.display = 'none';
-            }
-        });
     });
 </script>

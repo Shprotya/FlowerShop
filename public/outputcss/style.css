@@ -19,8 +19,8 @@ body {
   border-color: #CE5E5B !important;
 }
 .btn-primary:hover {
-  background-color: rgb(189.4084507042, 60.0563380282, 56.5915492958);
-  border-color: rgb(189.4084507042, 60.0563380282, 56.5915492958);
+  background-color: rgb(189.4084507042, 60.0563380282, 56.5915492958) !important;
+  border-color: rgb(189.4084507042, 60.0563380282, 56.5915492958) !important;
 }
 
 main {
@@ -210,18 +210,19 @@ form {
   color: #CE5E5B;
 }
 
+.card-header {
+  background-color: #CE5E5B;
+  color: white;
+  padding: 1rem 1.5rem;
+  border-bottom: none;
+}
+
 .checkout-summary {
   position: sticky;
   top: 20px;
   border-radius: 10px;
   border: none;
   overflow: hidden;
-}
-.checkout-summary .card-header {
-  background-color: #CE5E5B;
-  color: white;
-  padding: 1rem 1.5rem;
-  border-bottom: none;
 }
 .checkout-summary .list-group-item:last-child {
   border-bottom: none;

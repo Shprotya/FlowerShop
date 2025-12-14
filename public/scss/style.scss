@@ -42,8 +42,8 @@ body {
     @extend %smooth-rise;
 
     &:hover {
-        background-color: darken($dusty-rose, 10%);
-        border-color: darken($dusty-rose, 10%);
+        background-color: darken($dusty-rose, 10%) !important;
+        border-color: darken($dusty-rose, 10%) !important;
     }
 }
 
@@ -272,20 +272,19 @@ form {
 
 
 // Right Column: Cart Summary Card
+.card-header {
+    background-color: $dusty-rose;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-bottom: none;
+}
+
 .checkout-summary {
     position: sticky; // Make it stick for a better experience on long forms
     top: 20px;
     border-radius: 10px;
     border: none;
     overflow: hidden;
-
-    // Card Header
-    .card-header {
-        background-color: $dusty-rose;
-        color: white;
-        padding: 1rem 1.5rem;
-        border-bottom: none;
-    }
 
     .list-group-item:last-child {
         border-bottom: none;
