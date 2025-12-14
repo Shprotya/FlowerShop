@@ -1,7 +1,7 @@
-.btn-primary, .product-card, .hover-effect {
+.product-card, .btn-primary, .hover-effect {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.btn-primary:hover, .product-card:hover, .hover-effect:hover {
+.product-card:hover, .btn-primary:hover, .hover-effect:hover {
   transform: translateY(-5px);
 }
 
@@ -12,6 +12,15 @@ body {
 
 .hover-effect:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+  background-color: #CE5E5B !important;
+  border-color: #CE5E5B !important;
+}
+.btn-primary:hover {
+  background-color: rgb(189.4084507042, 60.0563380282, 56.5915492958);
+  border-color: rgb(189.4084507042, 60.0563380282, 56.5915492958);
 }
 
 main {
@@ -65,15 +74,6 @@ form {
 }
 .footer .newsletter-button {
   padding: 0.75rem 1rem;
-}
-
-.card-header {
-  background-color: #fef7f0;
-  border-bottom: 2px solid #CE5E5B;
-}
-.card-header h4 {
-  color: #CE5E5B;
-  font-weight: 600;
 }
 
 .product-card {
@@ -197,7 +197,7 @@ form {
   box-shadow: 0 0 0 0.25rem rgba(221, 142, 140, 0.25);
 }
 #user-checkout fieldset legend {
-  color: #CE5E5B;
+  color: #CE5E5B !important;
   font-size: 1.1rem;
   border-bottom: 1px solid white;
   padding-bottom: 0.5rem;
@@ -242,13 +242,4 @@ form {
 }
 .checkout-summary #order-total {
   color: #CE5E5B;
-}
-
-.btn-primary {
-  background-color: #CE5E5B;
-  border-color: #CE5E5B;
-}
-.btn-primary:hover {
-  background-color: rgb(189.4084507042, 60.0563380282, 56.5915492958);
-  border-color: rgb(189.4084507042, 60.0563380282, 56.5915492958);
 }

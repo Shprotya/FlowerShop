@@ -131,6 +131,26 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+        const loggedIn = localStorage.getItem('loggedIn');
+
+        if (loggedIn !== '1') {
+            const modalElement = document.getElementById('loginRequiredModal');
+
+            if (modalElement && typeof bootstrap !== 'undefined') {
+                const loginModal = new bootstrap.Modal(modalElement);
+                loginModal.show();
+            }
+
+            // Disable the checkout form completely
+            const checkoutForm = document.getElementById('user-checkout');
+            if (checkoutForm) {
+                checkoutForm.querySelectorAll('input, button').forEach(el => {
+                    el.disabled = true;
+                });
+            }
+
+            return; // stop running checkout logic
+        }
         const checkoutForm = document.getElementById('user-checkout');
         const checkoutButton = document.getElementById('checkout-button');
         const sameAddressCheck = document.getElementById('sameAddressCheck');

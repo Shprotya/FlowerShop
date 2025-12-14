@@ -36,6 +36,17 @@ body {
     }
 }
 
+.btn-primary {
+    background-color: $dusty-rose !important;
+    border-color: $dusty-rose !important;
+    @extend %smooth-rise;
+
+    &:hover {
+        background-color: darken($dusty-rose, 10%);
+        border-color: darken($dusty-rose, 10%);
+    }
+}
+
 main {
     flex: 1;
 }
@@ -92,18 +103,6 @@ form {
 
     .newsletter-button {
         padding: 0.75rem 1rem;
-    }
-}
-
-// card and button styles
-
-.card-header {
-    background-color: $soft-peach; // #fef7f0
-    border-bottom: 2px solid $dusty-rose; // #CE5E5B
-
-    h4 {
-        color: $dusty-rose; // #CE5E5B
-        font-weight: 600;
     }
 }
 
@@ -245,19 +244,16 @@ form {
     }
 }
 
-// ... (rest of your existing styles)
-
-// --- Checkout Page Styles ---
+// Checkout Page Styles 
 #user-checkout {
     .form-control:focus {
         border-color: $blush-pink;
         box-shadow: 0 0 0 0.25rem rgba($blush-pink, 0.25);
     }
 
-    // Custom style for the fieldset legend (REMOVED !important)
-    // #user-checkout provides enough specificity.
+    // Custom style for the fieldset legend 
     fieldset legend {
-        color: $dusty-rose;
+        color: $dusty-rose !important;
         font-size: 1.1rem;
         border-bottom: 1px solid lighten($soft-peach, 5%);
         padding-bottom: 0.5rem;
@@ -283,8 +279,7 @@ form {
     border: none;
     overflow: hidden;
 
-    // Card Header (REMOVED !important)
-    // Relying on .checkout-summary .card-header being more specific than the global .card-header
+    // Card Header
     .card-header {
         background-color: $dusty-rose;
         color: white;
@@ -315,21 +310,8 @@ form {
         }
     }
 
-    // Order Total styling (REMOVED !important)
-    // The ID selector is the most powerful.
+    // Order Total styling
     #order-total {
         color: $dusty-rose;
-    }
-}
-
-// Adjusting the primary button color to match the theme (REMOVED !important)
-.btn-primary {
-    background-color: $dusty-rose;
-    border-color: $dusty-rose;
-    @extend %smooth-rise;
-
-    &:hover {
-        background-color: darken($dusty-rose, 10%);
-        border-color: darken($dusty-rose, 10%);
     }
 }
