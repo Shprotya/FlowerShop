@@ -5,7 +5,6 @@ const exphbs = require('express-handlebars');
 // for reading JSON files
 const fs = require('fs');
 
-
 // instantiate express
 const app = express();
 
@@ -14,35 +13,26 @@ app.engine(
     'hbs',
     exphbs.engine({
         extname: '.hbs',
-        // use this layout by default - if you have different layout
-        // for say home page - you can toggle this in your code
         defaultLayout: 'default',
-        // set location of layouts
         layoutsDir: 'views/layouts',
-        // set location of partials - header, footer, etc
         partialsDir: 'views/partials',
     })
 );
 
-// set the view engine to handlebars
 app.set('view engine', 'hbs');
-// where to find all of the view
 app.set('views', 'views');
-// where to find static files - css, images, js
 app.use(express.static('public'));
-
 app.use(express.urlencoded({ extended: true }));
 
 // home page or home route
 app.get('/', (req, res) => {
     const state = { home: true, shop: false, about: false, contact: false, login: false, checkout: false };
     const head = {
-        title: "Petal Poetry",
-        description: "Explore different flowers for sale",
-        keywords: "flower shop, buy flowers, floral arrangements, bouquets"
+        title: "Petal Poetry - Dublin's Premier Florist | Fresh Flower Delivery",
+        description: "Petal Poetry offers fresh flower delivery across Dublin. Browse beautiful bouquets, wedding flowers, plants, and gifts. Order online for same-day delivery.",
+        keywords: "Dublin florist, flower delivery Dublin, fresh flowers Ireland, wedding flowers Dublin, bouquets Dublin"
     };
 
-    // Load products and filter featured ones for home page
     const allProducts = JSON.parse(fs.readFileSync('./public/data/products.json', 'utf8'));
     const featuredProducts = allProducts.filter(product => product.featured === true);
 
@@ -54,15 +44,13 @@ app.get('/', (req, res) => {
 app.get('/shop', (req, res) => {
     const state = { home: false, shop: true, about: false, contact: false, login: false, checkout: false };
     const head = {
-        title: "Shop - Petal Poetry",
-        description: "Browse our flower collection",
-        keywords: "flower shop, buy flowers, floral arrangements, bouquets"
+        title: "Shop Flowers Online - Petal Poetry Dublin",
+        description: "Shop our complete collection of fresh flowers, elegant bouquets, wedding arrangements, indoor plants, and floral gifts. Free delivery across Dublin on orders over €30.",
+        keywords: "buy flowers online Dublin, flower bouquets, wedding flowers, indoor plants, floral gifts Dublin"
     };
 
-    // Load products from JSON file
     const products = JSON.parse(fs.readFileSync('./public/data/products.json', 'utf8'));
-    const selectedCategory = req.query.category || 'all'; // Get category from URL query
-
+    
     res.render('shop', { state: state, head: head, products: products });
     console.log('shop');
 });
@@ -71,8 +59,9 @@ app.get('/shop', (req, res) => {
 app.get('/about', (req, res) => {
     const state = { home: false, shop: false, about: true, contact: false, login: false, checkout: false };
     const head = {
-        title: "About - Petal Poetry", description: "Learn about Petal Poetry",
-        keywords: "about us, flower shop, Petal Poetry"
+        title: "About Petal Poetry - Dublin's Trusted Florist Since 2004",
+        description: "Learn about Petal Poetry, Dublin's family-owned florist with over 20 years of experience. Discover our commitment to fresh, locally-sourced flowers and sustainable practices.",
+        keywords: "about Petal Poetry, Dublin florist history, local flower shop, family florist Dublin"
     };
     res.render('about', { state: state, head: head });
     console.log('about');
@@ -82,8 +71,9 @@ app.get('/about', (req, res) => {
 app.get('/contact', (req, res) => {
     const state = { home: false, shop: false, about: false, contact: true, login: false, checkout: false };
     const head = {
-        title: "Contact - Petal Poetry", description: "Contact us",
-        keywords: "contact, flower shop, Petal Poetry"
+        title: "Contact Petal Poetry Dublin | Location, Hours & Delivery Info",
+        description: "Get in touch with Petal Poetry. Visit us at 123 Bloom Street, Dublin 2 or call +353 1 234 5678. Open Monday-Sunday with same-day delivery available.",
+        keywords: "contact florist Dublin, Petal Poetry location, flower delivery Dublin"
     };
     res.render('contact', { state: state, head: head });
     console.log('contact');
@@ -93,8 +83,10 @@ app.get('/contact', (req, res) => {
 app.get('/login', (req, res) => {
     const state = { home: false, shop: false, about: false, contact: false, login: true, checkout: false };
     const head = {
-        title: "Login - Petal Poetry", description: "Login to your account",
-        keywords: "login, account, Petal Poetry"
+        title: "Login - Petal Poetry Customer Account",
+        description: "Sign in to your Petal Poetry account to access exclusive member benefits, track orders, and save your delivery details.",
+        keywords: "florist login, customer account, Petal Poetry account",
+        robots: "noindex, nofollow" // Don't index login pages
     };
     res.render('login', { state: state, head: head });
     console.log('login');
@@ -104,8 +96,10 @@ app.get('/login', (req, res) => {
 app.get('/checkout', (req, res) => {
     const state = { home: false, shop: false, about: false, contact: false, login: false, checkout: true };
     const head = {
-        title: "Checkout - Petal Poetry", description: "Complete your purchase",
-        keywords: "checkout, cart, purchase, Petal Poetry"
+        title: "Checkout - Complete Your Flower Order | Petal Poetry",
+        description: "Complete your flower order with secure checkout. Fast delivery across Dublin.",
+        keywords: "flower delivery checkout, order flowers Dublin",
+        robots: "noindex, nofollow" // Don't index checkout pages
     };
     res.render('checkout', { state: state, head: head });
     console.log('checkout');
@@ -115,10 +109,11 @@ app.get('/checkout', (req, res) => {
 app.get('/userdetails', (req, res) => {
     const state = { home: false, shop: false, about: false, contact: false, login: false, checkout: false, userdetails: true };
     const head = {
-        title: "User Details - Petal Poetry", description: "Your saved details",
-        keywords: "user details, account, Petal Poetry"
+        title: "Your Account Details - Petal Poetry",
+        description: "Manage your Petal Poetry account details, delivery addresses, and preferences.",
+        keywords: "account settings, user profile, delivery details",
+        robots: "noindex, nofollow" // Don't index user account pages
     };
-    // Render the `userDetails.hbs` view (file is named `userDetails.hbs` in views/)
     res.render('userdetails', { state: state, head: head });
     console.log('userdetails');
 });
