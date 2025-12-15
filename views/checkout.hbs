@@ -132,18 +132,62 @@
 </div>
 
 <script>
+    /* Helper functions for address loading/clearing (Stay outside DOMContentLoaded) */
+    function loadUserDetails() {
+        const storedDetails = localStorage.getItem('userdetails');
+        let userData = null;
+
+        if (storedDetails) {
+            try {
+                userData = JSON.parse(storedDetails);
+            } catch (e) {
+                console.error("Error parsing user details from localStorage:", e);
+                return;
+            }
+        }
+
+        if (userData) {
+            // Define all fields to be modified (Using keys from userdetails form script)
+            const fields = [
+                { id: 'getFirstName', key: 'firstName' },
+                { id: 'getLastName', key: 'lastName' },
+                { id: 'getAddress1', key: 'address1' },
+                { id: 'getAddress2', key: 'address2' },
+                { id: 'getAddress3', key: 'address3' }
+            ];
+
+            // Loop and set value/disable property
+            fields.forEach(field => {
+                const el = document.getElementById(field.id);
+                if (el) {
+                    // Use key property to look up in userData
+                    el.value = userData[field.key] || '';
+                }
+            });
+
+            // Update card name to match delivery name if possible
+            const cardNameEl = document.getElementById('cardName');
+            if (cardNameEl && userData.firstName && userData.lastName) {
+                cardNameEl.value = `${userData.firstName.toUpperCase()} ${userData.lastName.toUpperCase()}`;
+            }
+        }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
 
-        /* login guard */
+        /* 🔒 1. LOGIN GUARD: RUNS FIRST AND UNCONDITIONALLY 🔒 */
         const loggedIn = localStorage.getItem('loggedIn');
         const checkoutForm = document.getElementById('user-checkout');
 
         if (loggedIn !== '1') {
             const modal = document.getElementById('loginRequiredModal');
+
+            // Show the modal if required
             if (modal && typeof bootstrap !== 'undefined') {
                 new bootstrap.Modal(modal).show();
             }
 
+            // Disable all checkout fields and buttons
             if (checkoutForm) {
                 checkoutForm.querySelectorAll('input, button').forEach(el => {
                     el.disabled = true;
@@ -151,6 +195,7 @@
             }
         }
 
+        /* 📦 2. CORE CHECKOUT ELEMENTS & GLOBALS (Run next) 📦 */
         const checkoutButton = document.getElementById('checkout-button');
         const cartItemsList = document.getElementById('cart-items-list');
         const emptyMessage = document.getElementById('empty-cart-message');
@@ -159,7 +204,12 @@
         const orderTotalEl = document.getElementById('order-total');
         const shippingCost = 5.00;
 
-        /* cart helpers */
+        // Helper array to clear address fields
+        const deliveryFields = [
+            'getFirstName', 'getLastName', 'getAddress1', 'getAddress2', 'getAddress3'
+        ];
+
+        /* cart helpers - DEFINED outside of conditional block */
         function getCartItems() {
             try {
                 return JSON.parse(localStorage.getItem('cartItems')) || [];
@@ -177,14 +227,14 @@
             if (checkoutSpan) checkoutSpan.textContent = totalQty;
         }
 
-        /* render cart  */
+        /* render cart - DEFINED outside of conditional block */
         function renderCartSummary() {
             const cartItems = getCartItems();
             cartItemsList.innerHTML = '';
 
             if (cartItems.length === 0) {
                 emptyMessage.style.display = 'block';
-                checkoutButton.disabled = true;
+                if (checkoutButton) checkoutButton.disabled = true; // Added check for safety
                 subtotalEl.textContent = '€0.00';
                 shippingCostEl.parentNode.style.display = 'none';
                 orderTotalEl.textContent = '€0.00';
@@ -192,7 +242,7 @@
             }
 
             emptyMessage.style.display = 'none';
-            checkoutButton.disabled = false;
+            if (checkoutButton) checkoutButton.disabled = false; // Added check for safety
 
             let subtotal = 0;
 
@@ -219,6 +269,27 @@
             orderTotalEl.textContent = '€' + (subtotal + shippingCost).toFixed(2);
         }
 
+
+        /* 3. CHECKBOX LISTENER (Only added if element exists) */
+        const checkbox = document.getElementById('sameAddressCheck');
+        if (checkbox) {
+            checkbox.addEventListener('change', function () {
+                if (this.checked) {
+                    loadUserDetails();
+                } else {
+                    // When unchecked: Clear fields
+                    deliveryFields.forEach(id => {
+                        const el = document.getElementById(id);
+                        if (el) {
+                            el.value = ''; // Clear value
+                        }
+                    });
+                }
+            });
+        }
+
+        /* 4. EVENT LISTENERS (Always needed for core functionality) */
+
         /* remove item */
         cartItemsList.addEventListener('click', (e) => {
             const btn = e.target.closest('.remove-item-btn');
@@ -231,30 +302,33 @@
         });
 
         /* payments */
-        checkoutButton.addEventListener('click', (e) => {
-            e.preventDefault();
+        if (checkoutButton) { // Ensure button exists before adding listener
+            checkoutButton.addEventListener('click', (e) => {
+                e.preventDefault();
 
-            if (getCartItems().length === 0) return;
+                if (getCartItems().length === 0) return;
 
-            const cardNumber = document.getElementById('cardNumber').value;
-            const cardCvv = document.getElementById('cardCvv').value;
+                const cardNumber = document.getElementById('cardNumber').value;
+                const cardCvv = document.getElementById('cardCvv').value;
 
-            const success = cardNumber === '1234 5678 9102 3456' && cardCvv === '123';
+                const success = cardNumber === '1234 5678 9102 3456' && cardCvv === '123';
 
-            document.getElementById('payment-success').style.display = success ? 'block' : 'none';
-            document.getElementById('payment-failure').style.display = success ? 'none' : 'block';
+                document.getElementById('payment-success').style.display = success ? 'block' : 'none';
+                document.getElementById('payment-failure').style.display = success ? 'none' : 'block';
 
-            if (success) {
-                localStorage.setItem('cartItems', '[]');
-                localStorage.setItem('checkout', 0);
+                if (success) {
+                    localStorage.setItem('cartItems', '[]');
+                    localStorage.setItem('checkout', 0);
 
-                const checkoutSpan = document.querySelector('#checkout');
-                if (checkoutSpan) checkoutSpan.textContent = 0;
+                    const checkoutSpan = document.querySelector('#checkout');
+                    if (checkoutSpan) checkoutSpan.textContent = 0;
 
-                renderCartSummary();
-            }
-        });
+                    renderCartSummary();
+                }
+            });
+        }
 
+        /* 5. INITIAL RENDER */
         renderCartSummary();
     });
 </script>

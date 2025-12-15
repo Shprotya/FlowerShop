@@ -111,11 +111,9 @@
             } catch (e) {
                 console.error("Error parsing stored user details. Using defaults.", e);
             }
-        } else {
-            // Save the new complete default object to local storage if it was null
-            localStorage.setItem('userdetails', JSON.stringify(userDetails));
-        }
-
+        } 
+              
+        localStorage.setItem('userdetails', JSON.stringify(userDetails));
         return userDetails;
     }
 
