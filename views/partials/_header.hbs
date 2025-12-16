@@ -1,18 +1,28 @@
 <nav class="navbar navbar-expand-lg">
-    <div class="container">
-        <!-- Logo/Brand -->
+    <div class="container d-flex justify-content-between align-items-center">
+
         <a class="navbar-brand" href="/">
             <img src="images/logo.png" alt="logo" height="80" width="80">
             <strong>Petal Poetry</strong>
         </a>
 
-        <!-- Hamburger menu button for mobile -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="d-flex align-items-center order-lg-3">
 
-        <!-- Navigation links -->
-        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="list-unstyled mb-0 d-flex me-3">
+                <li class="nav-item">
+                    <a class="nav-link {{#if state.checkout}}active{{/if}} d-flex align-items-center" href="/checkout">
+                        <span class="me-1">🛒</span>Cart&nbsp;<span id="checkout"></span>
+                    </a>
+                </li>
+            </ul>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse w-100 order-2" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     <a class="nav-link {{#if state.home}}active{{/if}}" href="/">Home</a>
@@ -32,11 +42,6 @@
                 <li class="nav-item">
                     <a class="nav-link {{#if state.userdetails}}active{{/if}}" id="userdetails" href="/userdetails">User
                         Details</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{#if state.checkout}}active{{/if}}" href="/checkout">
-                        🛒 Cart <span id="checkout"></span>
-                    </a>
                 </li>
             </ul>
         </div>
