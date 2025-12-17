@@ -15,3 +15,5 @@ SEO-Friendly Head Data: Each route dynamically sets its own title, description, 
 - Express.js: Web framework.
 - Express Handlebars: Templating engine.
 - fs (File System): Used for synchronously reading the local product data (products.json).
+- Bootstrap
+- SASS
