@@ -8,7 +8,7 @@ Multi-Page Application: Routes for Home (/), Shop (/shop), About (/about), Conta
 Dynamic Product Loading: Loads featured products for the home page and all products for the shop page from a products.json file.
 Handlebars Templating: Uses express-handlebars for views, layouts, and partials.
 Static Asset Serving: Serves static files (CSS, images, etc.) from the public directory.
-SEO-Friendly Head Data: Each route dynamically sets its own <title>, <description>, and <keywords>.
+SEO-Friendly Head Data: Each route dynamically sets its own title, description, and keywords.
 
 🛠️ Technology Stack
 - Node.js
