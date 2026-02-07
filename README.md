@@ -17,3 +17,5 @@ SEO-Friendly Head Data: Each route dynamically sets its own title, description, 
 - fs (File System): Used for synchronously reading the local product data (products.json).
 - Bootstrap
 - SASS
+
+Can be viewed via link: [Petal Poetry](flower-shop-phi-self.vercel.app)
