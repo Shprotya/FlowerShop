@@ -18,4 +18,4 @@ SEO-Friendly Head Data: Each route dynamically sets its own title, description, 
 - Bootstrap
 - SASS
 
-Can be viewed via link: [Petal Poetry](flower-shop-phi-self.vercel.app)
+Can be viewed via link: [Petal Poetry](<https://flower-shop-phi-self.vercel.app>)
